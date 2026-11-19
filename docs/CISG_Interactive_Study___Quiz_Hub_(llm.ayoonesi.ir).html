@@ -1,0 +1,3520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="charter">
+  <title>CISG &amp; Bilingual Legal English Mastery — cisg.ayoonesi.ir</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Charter Page and Surfaces */
+      --background: #f7f4ec;
+      --surface-container-low: #fffdf8;
+      --surface-container: #ece5d4;
+      --surface-container-high: #e3dac4;
+
+      /* Charter Ink */
+      --on-surface: #1c1f26;
+      --on-surface-variant: #4f5360;
+
+      /* Charter Rules */
+      --outline: #b08d57;
+      --outline-variant: #d9cfb8;
+
+      /* Charter Accents */
+      --primary: #14213d;
+      --on-primary: #f7f4ec;
+      --primary-container: #e3e6ee;
+      --on-primary-container: #14213d;
+      --secondary: #2d5a4a;
+      --secondary-container: #e2ede8;
+      --tertiary: #8a6a35;
+      --error: #9b2c2c;
+      --error-container: #f9e6e6;
+      --on-error: #f7f4ec;
+
+      /* Data series */
+      --data-1: #14213d;
+      --data-2: #8a6a35;
+      --data-3: #2d5a4a;
+      --data-4: #5b7aa0;
+      --data-context: #c2bba9;
+
+      /* Semantic */
+      --positive: #2d5a4a;
+      --warning: #8a6a35;
+      --focus: #14213d;
+
+      /* Derived Charter mixes */
+      --brass-on-navy: color-mix(in srgb, var(--outline) 75%, var(--on-primary));
+      --lede-on-navy: color-mix(in srgb, var(--on-primary) 78%, var(--primary));
+      --navy-hover: color-mix(in srgb, var(--primary) 88%, var(--on-surface));
+      --scrim: color-mix(in srgb, var(--primary) 22%, transparent);
+
+      /* Fonts */
+      --font-headline: 'Libre Caslon Text', Georgia, serif;
+      --font-body: 'Inter', sans-serif;
+      --font-label: 'Inter', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --font-persian: 'Noto Sans Arabic', 'Inter', sans-serif;
+
+      /* Type scale (Dashboard / Explorer) */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.35rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Shape */
+      --rounded: 0.125rem;
+      --rounded-lg: 0.125rem;
+      --rounded-full: 0.125rem;
+
+      /* Style effects */
+      --brass-rule: 2px solid var(--outline);
+      --brass-rule-heavy: 3px solid var(--outline);
+      --hairline: 1px solid var(--outline-variant);
+      --leaf-underline: 0 1px 0 var(--outline-variant);
+      --popover-shadow: 0 10px 28px color-mix(in srgb, var(--primary) 16%, transparent);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header { position: static !important; }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .title-band :focus-visible {
+      outline: 2px solid var(--brass-on-navy);
+      outline-offset: 2px;
+    }
+
+    /* Compact Navy Title Band (Charter Treatment #1 & #2) */
+    .title-band {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-bottom: var(--brass-rule-heavy);
+      padding: var(--space-lg) var(--space-lg) var(--space-xl);
+    }
+
+    .title-band-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid color-mix(in srgb, var(--outline) 38%, transparent);
+      margin-bottom: var(--space-lg);
+    }
+
+    .brand-mark {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--space-sm);
+    }
+
+    .domain-id {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--brass-on-navy);
+      letter-spacing: 0.04em;
+    }
+
+    .brand-sep {
+      color: color-mix(in srgb, var(--on-primary) 45%, var(--primary));
+    }
+
+    .treaty-ref {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--lede-on-navy);
+    }
+
+    .primary-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .nav-link {
+      background: transparent;
+      border: 1px solid transparent;
+      border-bottom: 2px solid transparent;
+      color: var(--on-primary);
+      padding: var(--space-sm) var(--space-md);
+      min-height: 44px;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      border-radius: var(--rounded);
+      transition: border-color var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .nav-link:hover {
+      background-color: color-mix(in srgb, var(--on-primary) 10%, var(--primary));
+      border-bottom-color: var(--brass-on-navy);
+    }
+
+    .nav-link.active {
+      border-bottom-color: var(--outline);
+      color: var(--brass-on-navy);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: end;
+    }
+
+    .title-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brass-on-navy);
+      margin: 0 0 var(--space-sm) 0;
+    }
+
+    .title-band h1 {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: var(--display-size);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--on-primary);
+      margin: 0 0 var(--space-md) 0;
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid color-mix(in srgb, var(--outline) 60%, transparent);
+    }
+
+    .title-band .lede {
+      color: var(--lede-on-navy);
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 65ch;
+      margin: 0;
+    }
+
+    .hero-meta-box {
+      background-color: color-mix(in srgb, var(--on-primary) 6%, var(--primary));
+      border-top: var(--brass-rule);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .hero-meta-title {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brass-on-navy);
+      margin: 0 0 var(--space-sm) 0;
+    }
+
+    .hero-meta-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: var(--space-xs);
+      font-size: 0.875rem;
+      color: var(--lede-on-navy);
+    }
+
+    .hero-meta-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-md);
+      border-bottom: 1px solid color-mix(in srgb, var(--on-primary) 12%, transparent);
+      padding-bottom: var(--space-xs);
+    }
+
+    .hero-meta-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .hero-meta-val {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--on-primary);
+    }
+
+    /* Main Page Grid */
+    .page-grid {
+      display: grid;
+      gap: var(--space-xl);
+      padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+      max-width: 1240px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .page-grid * { min-width: 0; }
+
+    /* KPI Figure Cards (Charter Treatments #3 & #4) */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .figure-card {
+      background: var(--surface-container-low);
+      border-top: var(--brass-rule);
+      box-shadow: var(--leaf-underline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .figure-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-xs);
+    }
+
+    .figure-value {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem);
+      line-height: 1.15;
+      font-variant-numeric: tabular-nums lining-nums;
+      color: var(--on-surface);
+    }
+
+    .figure-delta {
+      font-size: 0.8125rem;
+      color: var(--tertiary);
+      font-weight: 600;
+      margin-top: var(--space-xs);
+    }
+
+    .figure-delta.positive {
+      color: var(--secondary);
+    }
+
+    /* Section Header (Charter Treatment #5) */
+    .section-head {
+      border-top: var(--brass-rule);
+      padding-top: var(--space-md);
+      border-bottom: var(--hairline);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-md);
+    }
+
+    .section-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--tertiary);
+      margin: 0 0 var(--space-xs) 0;
+    }
+
+    .section-head h2 {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: var(--headline-size);
+      line-height: 1.15;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .section-subtitle {
+      color: var(--on-surface-variant);
+      font-size: 0.9375rem;
+      margin: var(--space-xs) 0 0 0;
+      max-width: 65ch;
+    }
+
+    /* Buttons (Charter square 2px corners) */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--navy-hover);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background-color: var(--primary-container);
+    }
+
+    .btn-subtle {
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+    }
+
+    .btn-subtle:hover:not(:disabled) {
+      background-color: var(--surface-container-high);
+    }
+
+    .btn-subtle[aria-pressed="true"],
+    .filter-tab[aria-pressed="true"],
+    .filter-tab.active {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Tags (Charter stamp, squared corners) */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: 2px var(--space-sm);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      background: transparent;
+      color: var(--tertiary);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .tag-green {
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+
+    .tag-navy {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Inputs & Labels */
+    .control-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: end;
+      margin-bottom: var(--space-lg);
+      padding: var(--space-md);
+      background-color: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded);
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      flex: 1 1 220px;
+    }
+
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+
+    .input-control,
+    .select-control {
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      color: var(--on-surface);
+      transition: border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .select-control {
+      padding-right: var(--space-xl);
+    }
+
+    .input-control:focus,
+    .select-control:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .filter-tab {
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .filter-tab:hover {
+      background-color: var(--surface-container);
+      border-color: var(--outline);
+    }
+
+    /* CISG Explorer Asymmetric Two-Column Layout */
+    .explorer-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .module-list {
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .module-card {
+      background-color: var(--surface-container-low);
+      border: var(--hairline);
+      border-top: var(--brass-rule);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .module-card.selected {
+      background-color: var(--surface-container-low);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .module-card.mastered {
+      border-top-color: var(--secondary);
+    }
+
+    .module-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .module-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .article-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      background-color: var(--surface-container);
+      color: var(--primary);
+      padding: 2px var(--space-sm);
+      border-radius: var(--rounded);
+    }
+
+    .module-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+      color: var(--on-surface);
+      margin: var(--space-xs) 0 var(--space-sm) 0;
+    }
+
+    .module-summary {
+      margin: 0 0 var(--space-md) 0;
+      color: var(--on-surface);
+      max-width: 65ch;
+    }
+
+    .module-rules {
+      margin: 0 0 var(--space-md) 0;
+      padding-left: var(--space-lg);
+      color: var(--on-surface-variant);
+      display: grid;
+      gap: var(--space-xs);
+      font-size: 0.9375rem;
+    }
+
+    .secretariat-box {
+      background-color: var(--surface-container);
+      border-left: 3px solid var(--outline);
+      padding: var(--space-sm) var(--space-md);
+      margin-bottom: var(--space-md);
+      font-size: 0.875rem;
+      color: var(--on-surface);
+    }
+
+    .secretariat-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tertiary);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    .module-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: var(--hairline);
+    }
+
+    .module-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    /* Inline Bilingual Term Trigger */
+    .term-trigger {
+      display: inline;
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid var(--outline);
+      padding: 0 1px;
+      margin: 0;
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color var(--dur-micro) var(--ease-out), border-bottom-width var(--dur-micro) var(--ease-out);
+    }
+
+    .term-trigger:hover,
+    .term-trigger:focus-visible {
+      background-color: var(--primary-container);
+    }
+
+    /* Right Inspector Panel */
+    .inspector-column {
+      display: grid;
+      gap: var(--space-lg);
+      position: sticky;
+      top: var(--space-lg);
+    }
+
+    .inspector-panel {
+      background-color: var(--surface-container-low);
+      border: var(--hairline);
+      border-top: var(--brass-rule);
+      padding: var(--space-lg);
+      border-radius: var(--rounded);
+    }
+
+    .inspector-panel h3 {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+      margin: 0 0 var(--space-sm) 0;
+      color: var(--on-surface);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    .comparison-table th {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: left;
+      padding: var(--space-sm);
+    }
+
+    .comparison-table td {
+      padding: var(--space-sm);
+      border-bottom: var(--hairline);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* SVG Schematic Container */
+    .schematic-wrap {
+      width: 100%;
+      overflow-x: auto;
+      padding-top: var(--space-sm);
+    }
+
+    .schematic-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Quiz Studio */
+    .quiz-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .quiz-card {
+      background-color: var(--surface-container-low);
+      border: var(--hairline);
+      border-top: var(--brass-rule);
+      padding: var(--space-xl);
+      border-radius: var(--rounded);
+    }
+
+    .quiz-progress-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--hairline);
+      margin-bottom: var(--space-lg);
+    }
+
+    .quiz-counter {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .quiz-question-text {
+      font-family: var(--font-headline);
+      font-weight: 400;
+      font-size: 1.25rem;
+      line-height: 1.4;
+      color: var(--on-surface);
+      margin: 0 0 var(--space-lg) 0;
+    }
+
+    .options-list {
+      display: grid;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .option-btn {
+      width: 100%;
+      min-height: 48px;
+      padding: var(--space-md);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      color: var(--on-surface);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background-color: var(--surface-container);
+      border-color: var(--outline);
+    }
+
+    .option-btn.selected {
+      background-color: var(--primary-container);
+      border-color: var(--primary);
+      box-shadow: inset 3px 0 0 var(--primary);
+    }
+
+    .option-btn.correct {
+      background-color: var(--secondary-container);
+      border-color: var(--secondary);
+      box-shadow: inset 3px 0 0 var(--secondary);
+    }
+
+    .option-btn.incorrect {
+      background-color: var(--error-container);
+      border-color: var(--error);
+      box-shadow: inset 3px 0 0 var(--error);
+    }
+
+    .option-letter {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .rationale-panel {
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--rounded);
+      margin-bottom: var(--space-lg);
+      border-left: 3px solid var(--secondary);
+      background-color: var(--secondary-container);
+    }
+
+    .rationale-panel.wrong {
+      border-left-color: var(--error);
+      background-color: var(--error-container);
+    }
+
+    .rationale-title {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0 0 var(--space-xs) 0;
+    }
+
+    .rationale-citations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+    }
+
+    .quiz-nav-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: var(--hairline);
+    }
+
+    .quiz-sidebar {
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    .score-table th {
+      background-color: var(--surface-container-high);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: var(--space-sm);
+      text-align: left;
+    }
+
+    .score-table th.num,
+    .score-table td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-family: var(--font-mono);
+    }
+
+    .score-table td {
+      padding: var(--space-sm);
+      border-bottom: var(--hairline);
+    }
+
+    .score-table tr.total-row td {
+      border-top: var(--brass-rule);
+      border-bottom: none;
+      font-weight: 700;
+    }
+
+    .q-dot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+      gap: var(--space-xs);
+    }
+
+    .q-dot {
+      min-height: 38px;
+      border: 1px solid var(--outline-variant);
+      background-color: var(--surface-container-low);
+      border-radius: var(--rounded);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--on-surface);
+    }
+
+    .q-dot.current {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .q-dot.is-correct {
+      background-color: var(--secondary);
+      color: var(--on-primary);
+      border-color: var(--secondary);
+    }
+
+    .q-dot.is-wrong {
+      background-color: var(--error);
+      color: var(--on-error);
+      border-color: var(--error);
+    }
+
+    .q-dot.is-pending {
+      background-color: var(--primary-container);
+      border-color: var(--primary);
+    }
+
+    /* Glossary Section */
+    .glossary-table-wrap {
+      background-color: var(--surface-container-low);
+      border: var(--hairline);
+      border-top: var(--brass-rule);
+      border-radius: var(--rounded);
+      overflow-x: auto;
+    }
+
+    .glossary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9375rem;
+    }
+
+    .glossary-table th {
+      background-color: var(--surface-container-high);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: left;
+      padding: var(--space-md);
+      color: var(--on-surface);
+      position: sticky;
+      top: 0;
+    }
+
+    .glossary-table td {
+      padding: var(--space-md);
+      border-bottom: var(--hairline);
+      vertical-align: top;
+    }
+
+    .glossary-table tr:hover td {
+      background-color: color-mix(in srgb, var(--surface-container) 45%, var(--surface-container-low));
+    }
+
+    .glossary-term-name {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    .glossary-synonyms {
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+      margin-top: var(--space-xs);
+    }
+
+    .fa {
+      font-family: var(--font-persian);
+      direction: rtl;
+      unicode-bidi: isolate;
+      letter-spacing: 0;
+      text-transform: none;
+      line-height: 1.7;
+    }
+
+    .persian-cell {
+      font-family: var(--font-persian);
+      direction: rtl;
+      text-align: right;
+      font-weight: 500;
+      color: var(--on-surface);
+      min-width: 160px;
+      line-height: 1.7;
+    }
+
+    .glossary-cards-mobile {
+      display: none;
+      gap: var(--space-md);
+    }
+
+    /* Interactive Bilingual Tooltip / Popover */
+    .term-popover {
+      position: fixed;
+      z-index: 100;
+      width: min(380px, calc(100vw - 2rem));
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline);
+      border-top: var(--brass-rule-heavy);
+      border-radius: var(--rounded);
+      box-shadow: var(--popover-shadow);
+      padding: var(--space-md) var(--space-lg);
+      display: none;
+    }
+
+    .term-popover.open {
+      display: block;
+    }
+
+    .popover-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      border-bottom: var(--hairline);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .popover-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .popover-fa {
+      font-family: var(--font-persian);
+      direction: rtl;
+      text-align: right;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin: var(--space-xs) 0 var(--space-sm) 0;
+      line-height: 1.7;
+    }
+
+    .popover-close {
+      min-width: 36px;
+      min-height: 36px;
+      background: transparent;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      color: var(--on-surface);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popover-close:hover {
+      background-color: var(--surface-container);
+    }
+
+    .popover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+      padding-top: var(--space-sm);
+      border-top: var(--hairline);
+    }
+
+    /* Footer & Sources */
+    .site-footer {
+      border-top: var(--brass-rule);
+      padding: var(--space-xl) var(--space-lg);
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+    }
+
+    .status-banner {
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--surface-container);
+      border-left: 3px solid var(--primary);
+      font-size: 0.875rem;
+      color: var(--on-surface);
+      margin-bottom: var(--space-md);
+      display: none;
+    }
+
+    .status-banner.visible {
+      display: block;
+    }
+
+    .empty-state {
+      background-color: var(--surface-container-low);
+      border: var(--hairline);
+      border-top: var(--brass-rule);
+      padding: var(--space-xl);
+      text-align: left;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 960px) {
+      .hero-grid,
+      .explorer-layout,
+      .quiz-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .inspector-column {
+        position: static;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .title-band {
+        padding: var(--space-md) var(--space-md) var(--space-lg);
+      }
+
+      .page-grid {
+        padding: var(--space-lg) var(--space-md);
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .glossary-table-wrap {
+        display: none;
+      }
+
+      .glossary-cards-mobile {
+        display: grid;
+      }
+
+      .quiz-card {
+        padding: var(--space-md);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Charter Navy Title Band -->
+  <header class="title-band" id="top">
+    <div class="title-band-inner">
+      <div class="top-bar">
+        <div class="brand-mark">
+          <span class="domain-id">cisg.ayoonesi.ir</span>
+          <span class="brand-sep" aria-hidden="true">|</span>
+          <span class="treaty-ref">Vienna 1980 · UNCITRAL · English / <span class="fa" lang="fa">فارسی</span></span>
+        </div>
+        <nav class="primary-nav" aria-label="Primary sections">
+          <button type="button" class="nav-link active" onclick="scrollToSection('overview', this)">Overview</button>
+          <button type="button" class="nav-link" onclick="scrollToSection('cisg-explorer', this)">CISG Parts I–IV</button>
+          <button type="button" class="nav-link" onclick="scrollToSection('quiz-studio', this)">Quiz Studio</button>
+          <button type="button" class="nav-link" onclick="scrollToSection('glossary-section', this)">Bilingual Glossary</button>
+        </nav>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <p class="title-kicker">International Commercial Law Study Platform</p>
+          <h1>United Nations Convention on Contracts for the International Sale of Goods</h1>
+          <p class="lede">
+            Structured mastery of all 101 Articles across Parts I–IV and the UNCITRAL Secretariat Explanatory Notes, paired with interactive article-cited assessments and bilingual English–Persian legal terminology.
+          </p>
+        </div>
+
+        <aside class="hero-meta-box" aria-label="Convention quick facts">
+          <p class="hero-meta-title">Treaty Instrument Profile</p>
+          <ul class="hero-meta-list">
+            <li><span>Adopted (Vienna)</span><span class="hero-meta-val">11 Apr 1980</span></li>
+            <li><span>Entered into Force</span><span class="hero-meta-val">01 Jan 1988</span></li>
+            <li><span>Original States</span><span class="hero-meta-val">11 States</span></li>
+            <li><span>Authentic Texts</span><span class="hero-meta-val">6 UN Languages</span></li>
+            <li><span>Complementary Text</span><span class="hero-meta-val">Limitation 1974/80</span></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-grid">
+
+    <!-- Top-Line KPI Mastery Row -->
+    <section id="overview" aria-label="Study progress metrics">
+      <div class="kpi-grid">
+        <div class="figure-card">
+          <span class="figure-label">CISG Architecture</span>
+          <span class="figure-value">101 Articles</span>
+          <span class="figure-delta">4 Parts · 22 Study Units</span>
+        </div>
+        <div class="figure-card">
+          <span class="figure-label">Units Mastered</span>
+          <span class="figure-value" id="kpi-mastered">0 / 22</span>
+          <span class="figure-delta positive" id="kpi-mastered-pct">0% complete</span>
+        </div>
+        <div class="figure-card">
+          <span class="figure-label">Quiz Accuracy</span>
+          <span class="figure-value" id="kpi-accuracy">—</span>
+          <span class="figure-delta" id="kpi-quiz-count">0 / 20 answered</span>
+        </div>
+        <div class="figure-card">
+          <span class="figure-label">Saved Legal Terms</span>
+          <span class="figure-value" id="kpi-bookmarks">0 / 36</span>
+          <span class="figure-delta">English ↔ <span class="fa" lang="fa">فارسی</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: CISG Parts I–IV & Secretariat Notes Explorer -->
+    <section id="cisg-explorer" aria-labelledby="cisg-heading">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Structured Treaty Breakdown · Articles 1–101</p>
+          <h2 id="cisg-heading">CISG Parts I–IV &amp; Secretariat Explanatory Notes</h2>
+          <p class="section-subtitle">
+            Filter by Part, search articles or doctrines, and click any highlighted legal term for an instant English–Persian definition.
+          </p>
+        </div>
+        <div class="module-btn-row">
+          <button type="button" class="btn btn-subtle" id="toggle-notes-btn" aria-pressed="true" onclick="toggleSecretariatNotes()">
+            <i data-lucide="book-open" width="16" height="16" aria-hidden="true"></i>
+            Secretariat Notes: On
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="exportStudyPack()">
+            <i data-lucide="download" width="16" height="16" aria-hidden="true"></i>
+            Export Study Pack
+          </button>
+        </div>
+      </div>
+
+      <div id="export-status" class="status-banner" role="status" aria-live="polite"></div>
+
+      <div class="filter-row" role="group" aria-label="Filter CISG by Part">
+        <button type="button" class="filter-tab active" data-part="all" onclick="setPartFilter('all', this)">All Parts (Arts. 1–101)</button>
+        <button type="button" class="filter-tab" data-part="part1" onclick="setPartFilter('part1', this)">Part I: Scope &amp; General (1–13)</button>
+        <button type="button" class="filter-tab" data-part="part2" onclick="setPartFilter('part2', this)">Part II: Formation (14–24)</button>
+        <button type="button" class="filter-tab" data-part="part3" onclick="setPartFilter('part3', this)">Part III: Sale of Goods (25–88)</button>
+        <button type="button" class="filter-tab" data-part="part4" onclick="setPartFilter('part4', this)">Part IV: Final Provisions (89–101)</button>
+      </div>
+
+      <div class="control-bar">
+        <div class="field-group">
+          <label class="field-label" for="cisg-search">Search Articles, Concepts, or Secretariat Notes</label>
+          <input type="search" id="cisg-search" class="input-control" placeholder="e.g., Article 39, fundamental breach, Art. 96, risk..." oninput="handleCisgSearch(this.value)">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="cisg-status-filter">Mastery Status</label>
+          <select id="cisg-status-filter" class="select-control" onchange="handleCisgStatusFilter(this.value)">
+            <option value="all">All Units</option>
+            <option value="unmastered">Unmastered Only</option>
+            <option value="mastered">Mastered Only</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="explorer-layout">
+        <!-- Left Main Column: Structured Units -->
+        <div class="module-list" id="cisg-module-list"></div>
+
+        <!-- Right Column: Doctrinal Schematics & Inspector -->
+        <aside class="inspector-column" aria-label="Doctrinal Inspector and Schematics">
+          <div class="inspector-panel" id="unit-inspector">
+            <span class="tag tag-navy">Selected Unit Inspector</span>
+            <h3 id="inspector-title" style="margin-top: var(--space-sm);">Select any CISG unit to inspect</h3>
+            <p id="inspector-body" style="color: var(--on-surface-variant); margin: 0 0 var(--space-md) 0;">
+              Click “Inspect” on any unit card to view its full Secretariat Note context, linked bilingual terminology, and exam focus points.
+            </p>
+            <div id="inspector-terms"></div>
+          </div>
+
+          <div class="inspector-panel">
+            <span class="tag">Visual Schematic</span>
+            <h3 style="margin-top: var(--space-sm);">Passing of Risk &amp; Avoidance Architecture</h3>
+            <p style="font-size: 0.875rem; color: var(--on-surface-variant); margin: 0 0 var(--space-sm) 0;">
+              Risk passes independently of title (Art. 4(b)) unless contract terms such as INCOTERMS vary Articles 67–69.
+            </p>
+            <div class="schematic-wrap">
+              <svg class="schematic-svg" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of CISG Passing of Risk under Articles 67, 68, and 69">
+                <!-- Background framing -->
+                <rect x="2" y="2" width="416" height="256" fill="#fffdf8" stroke="#d9cfb8" stroke-width="1"/>
+                <line x1="2" y1="2" x2="418" y2="2" stroke="#b08d57" stroke-width="3"/>
+
+                <!-- Header -->
+                <text x="16" y="26" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#8a6a35" letter-spacing="1">CHAPTER IV · ARTICLES 66–70</text>
+                <line x1="16" y1="36" x2="404" y2="36" stroke="#d9cfb8" stroke-width="1"/>
+
+                <!-- Row 1: Art 67 Carriage -->
+                <rect x="16" y="48" width="124" height="52" fill="#ece5d4" stroke="#b08d57" stroke-width="1"/>
+                <text x="24" y="68" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="#14213d">ART. 67 CARRIAGE</text>
+                <text x="24" y="84" font-family="Inter, sans-serif" font-size="10" fill="#4f5360">Contract of sale</text>
+                <line x1="140" y1="74" x2="176" y2="74" stroke="#14213d" stroke-width="1.5"/>
+                <polygon points="176,70 184,74 176,78" fill="#14213d"/>
+                <rect x="184" y="48" width="220" height="52" fill="#e3e6ee" stroke="#14213d" stroke-width="1"/>
+                <text x="194" y="67" font-family="Inter, sans-serif" font-size="10.5" font-weight="600" fill="#14213d">Handover to First Carrier</text>
+                <text x="194" y="83" font-family="Inter, sans-serif" font-size="9.5" fill="#4f5360">Requires clear identification to contract (67(2))</text>
+
+                <!-- Row 2: Art 68 In Transit -->
+                <rect x="16" y="114" width="124" height="52" fill="#ece5d4" stroke="#b08d57" stroke-width="1"/>
+                <text x="24" y="134" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="#14213d">ART. 68 TRANSIT</text>
+                <text x="24" y="150" font-family="Inter, sans-serif" font-size="10" fill="#4f5360">Goods already shipped</text>
+                <line x1="140" y1="140" x2="176" y2="140" stroke="#8a6a35" stroke-width="1.5"/>
+                <polygon points="176,136 184,140 176,144" fill="#8a6a35"/>
+                <rect x="184" y="114" width="220" height="52" fill="#fffdf8" stroke="#8a6a35" stroke-width="1"/>
+                <text x="194" y="133" font-family="Inter, sans-serif" font-size="10.5" font-weight="600" fill="#8a6a35">Conclusion of Contract</text>
+                <text x="194" y="149" font-family="Inter, sans-serif" font-size="9.5" fill="#4f5360">Retroactive if indicated; seller non-disclosure exception</text>
+
+                <!-- Row 3: Art 69 Residual -->
+                <rect x="16" y="180" width="124" height="58" fill="#ece5d4" stroke="#b08d57" stroke-width="1"/>
+                <text x="24" y="200" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="#14213d">ART. 69 RESIDUAL</text>
+                <text x="24" y="216" font-family="Inter, sans-serif" font-size="10" fill="#4f5360">Other cases / Ex-works</text>
+                <line x1="140" y1="209" x2="176" y2="209" stroke="#2d5a4a" stroke-width="1.5"/>
+                <polygon points="176,205 184,209 176,213" fill="#2d5a4a"/>
+                <rect x="184" y="180" width="220" height="58" fill="#e2ede8" stroke="#2d5a4a" stroke-width="1"/>
+                <text x="194" y="199" font-family="Inter, sans-serif" font-size="10.5" font-weight="600" fill="#2d5a4a">Buyer Takes Over Goods</text>
+                <text x="194" y="214" font-family="Inter, sans-serif" font-size="9.5" fill="#4f5360">Or placed at disposal + breach by failing</text>
+                <text x="194" y="227" font-family="Inter, sans-serif" font-size="9.5" fill="#4f5360">to take delivery (or 3rd place awareness)</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="inspector-panel">
+            <span class="tag">Doctrinal Contrast</span>
+            <h3 style="margin-top: var(--space-sm);">CISG vs. Domestic Common Law</h3>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Doctrine</th>
+                  <th>CISG Rule</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Acceptance Timing</strong></td>
+                  <td>Receipt rule (Art. 18(2)), not mailbox dispatch; revocation cut-off at dispatch (Art. 16(1)).</td>
+                </tr>
+                <tr>
+                  <td><strong>Modification</strong></td>
+                  <td>No consideration required (Art. 29(1)); written NOM clauses bind unless conduct creates reliance (Art. 29(2)).</td>
+                </tr>
+                <tr>
+                  <td><strong>Writing Form</strong></td>
+                  <td>No Statute of Frauds (Art. 11), subject to Art. 12 / Art. 96 state declaration.</td>
+                </tr>
+                <tr>
+                  <td><strong>Avoidance</strong></td>
+                  <td>Notice required (Art. 26) + Fundamental Breach (Art. 25) or expired Nachfrist (Arts. 49, 64).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Section 2: Interactive Quiz Studio -->
+    <section id="quiz-studio" aria-labelledby="quiz-heading">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Applied Doctrinal &amp; Terminology Assessment</p>
+          <h2 id="quiz-heading">Interactive CISG &amp; Legal English Quiz Studio</h2>
+          <p class="section-subtitle">
+            Test your grasp of CISG scenarios, Secretariat Notes, and English–Persian legal terms with instant article-cited feedback and targeted review of missed items.
+          </p>
+        </div>
+        <div class="module-btn-row">
+          <button type="button" class="btn btn-subtle" id="mode-practice-btn" aria-pressed="true" onclick="setQuizMode('practice')">Practice (Instant)</button>
+          <button type="button" class="btn btn-subtle" id="mode-exam-btn" aria-pressed="false" onclick="setQuizMode('exam')">Exam Mode</button>
+          <button type="button" class="btn btn-subtle" id="mode-review-btn" aria-pressed="false" onclick="setQuizMode('review')">Review Missed</button>
+          <button type="button" class="btn btn-secondary" id="reset-quiz-btn" onclick="resetQuiz(this)">Reset Quiz</button>
+        </div>
+      </div>
+
+      <div class="filter-row" role="group" aria-label="Quiz category filters">
+        <button type="button" class="filter-tab active" data-qcat="all" onclick="setQuizCategory('all', this)">All Categories (20)</button>
+        <button type="button" class="filter-tab" data-qcat="Part I" onclick="setQuizCategory('Part I', this)">Part I: Scope &amp; General (4)</button>
+        <button type="button" class="filter-tab" data-qcat="Part II" onclick="setQuizCategory('Part II', this)">Part II: Formation (4)</button>
+        <button type="button" class="filter-tab" data-qcat="Part III" onclick="setQuizCategory('Part III', this)">Part III: Sale of Goods (6)</button>
+        <button type="button" class="filter-tab" data-qcat="Part IV" onclick="setQuizCategory('Part IV', this)">Part IV: Final Clauses (3)</button>
+        <button type="button" class="filter-tab" data-qcat="Legal English" onclick="setQuizCategory('Legal English', this)">Bilingual Legal English (3)</button>
+      </div>
+
+      <div class="quiz-layout">
+        <div class="quiz-card" id="quiz-stage"></div>
+
+        <aside class="quiz-sidebar" aria-label="Quiz navigator and score breakdown">
+          <div class="inspector-panel">
+            <span class="tag tag-navy">Question Navigator</span>
+            <h3 style="margin-top: var(--space-sm);">Current Set Progress</h3>
+            <div class="q-dot-grid" id="quiz-dot-grid"></div>
+            <div id="exam-submit-wrap" style="margin-top: var(--space-md); display: none;">
+              <button type="button" class="btn btn-primary" style="width: 100%;" onclick="submitExam()">Grade Exam Set</button>
+            </div>
+          </div>
+
+          <div class="inspector-panel">
+            <span class="tag">Performance Ledger</span>
+            <h3 style="margin-top: var(--space-sm);">Score by Category</h3>
+            <table class="score-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th class="num">Correct</th>
+                  <th class="num">Total</th>
+                </tr>
+              </thead>
+              <tbody id="quiz-score-tbody"></tbody>
+            </table>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Section 3: Bilingual Legal English Glossary -->
+    <section id="glossary-section" aria-labelledby="glossary-heading">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Bilingual Reference · English ↔ <span class="fa" lang="fa">فارسی</span></p>
+          <h2 id="glossary-heading">Legal English &amp; CISG Terminology Glossary</h2>
+          <p class="section-subtitle">
+            Core commercial, contractual, treaty, and dispute-resolution terms with Persian equivalents, definitions, and CISG cross-references.
+          </p>
+        </div>
+        <button type="button" class="btn btn-subtle" id="saved-terms-btn" aria-pressed="false" onclick="toggleSavedTermsFilter()">
+          <i data-lucide="bookmark" width="16" height="16" aria-hidden="true"></i>
+          Saved Terms Only
+        </button>
+      </div>
+
+      <div class="control-bar">
+        <div class="field-group">
+          <label class="field-label" for="glossary-search">Search English Term, Persian Equivalent, or Article</label>
+          <input type="search" id="glossary-search" class="input-control" placeholder="e.g., good faith, حسن نیت, mitigation, Art. 79..." oninput="handleGlossarySearch(this.value)">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="glossary-category">Domain Category</label>
+          <select id="glossary-category" class="select-control" onchange="handleGlossaryCategory(this.value)">
+            <option value="all">All Categories (36 Terms)</option>
+            <option value="Formation & Scope">Formation &amp; Scope</option>
+            <option value="Performance & Risk">Performance &amp; Risk</option>
+            <option value="Breach & Remedies">Breach &amp; Remedies</option>
+            <option value="Treaties & Dispute">Treaties &amp; Dispute Resolution</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="glossary-table-wrap">
+        <table class="glossary-table">
+          <thead>
+            <tr>
+              <th>Term &amp; Synonyms</th>
+              <th style="text-align: right;">Persian (<span class="fa" lang="fa">فارسی</span>)</th>
+              <th>Definition &amp; Context</th>
+              <th>CISG Link</th>
+              <th>Save</th>
+            </tr>
+          </thead>
+          <tbody id="glossary-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="glossary-cards-mobile" id="glossary-mobile-cards"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>cisg.ayoonesi.ir</strong> — Educational Platform for International Sales Law &amp; Bilingual Legal English.
+    </div>
+    <div>
+      Sources: UNCITRAL <em>United Nations Convention on Contracts for the International Sale of Goods</em> (Vienna, 1980; UN Sales No. E.10.V.14) &amp; Secretariat Explanatory Note; Bilingual Legal English Lexicon.
+    </div>
+  </footer>
+
+  <!-- Anchored / Floating Bilingual Term Popover -->
+  <div id="term-popover" class="term-popover" role="dialog" aria-modal="false" aria-labelledby="popover-term-title">
+    <div class="popover-header">
+      <div>
+        <span class="tag" id="popover-category">Term</span>
+        <h4 class="popover-title" id="popover-term-title" style="margin-top: var(--space-xs);">Term</h4>
+      </div>
+      <button type="button" class="popover-close" aria-label="Close term definition" onclick="closeTermPopover()">
+        <i data-lucide="x" width="16" height="16" aria-hidden="true"></i>
+      </button>
+    </div>
+    <p class="popover-fa" id="popover-persian" lang="fa" dir="rtl"></p>
+    <p id="popover-definition" style="margin: 0 0 var(--space-sm) 0; font-size: 0.9rem;"></p>
+    <p id="popover-synonyms" style="margin: 0; font-size: 0.8125rem; color: var(--on-surface-variant);"></p>
+    <div class="popover-footer">
+      <span class="article-badge" id="popover-cisg">CISG</span>
+      <button type="button" class="btn btn-subtle" style="min-height: 36px; padding: var(--space-xs) var(--space-sm);" id="popover-save-btn" onclick="togglePopoverBookmark()">
+        Save Term
+      </button>
+    </div>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    // =========================================================================
+    // DATA: BILINGUAL LEGAL ENGLISH GLOSSARY (36 Grounded Terms)
+    // =========================================================================
+    const GLOSSARY_DATA = [
+      {
+        id: `good-faith`,
+        term: `Good faith`,
+        persian: `حسن نیت`,
+        category: `Formation & Scope`,
+        definition: `Honesty or sincerity of intention. Under CISG Article 7(1), interpretation of the Convention must promote the observance of good faith in international trade.`,
+        example: `The details contained in this commercial offer have been communicated in good faith.`,
+        synonyms: `honesty, integrity, probity, truthfulness`,
+        cisgRef: `Art. 7(1)`,
+        part: `part1`
+      },
+      {
+        id: `exclude`,
+        term: `Exclude`,
+        persian: `مستثنی کردن، مانع شدن، محروم کردن`,
+        category: `Formation & Scope`,
+        definition: `To bar, omit, or preclude from application. Article 6 allows parties to exclude the CISG, while Article 2 excludes consumer, auction, and financial sales.`,
+        example: `Parties may exclude the application of the Convention by choosing domestic sales law.`,
+        synonyms: `bar, prohibit, except, omit, preclude`,
+        cisgRef: `Arts. 2, 6`,
+        part: `part1`
+      },
+      {
+        id: `valid`,
+        term: `Valid / Validity`,
+        persian: `معتبر، نافذ، صحیح / اعتبار، نفوذ، صحت`,
+        category: `Formation & Scope`,
+        definition: `Legally sound, binding, and enforceable. Under Article 4(a), the CISG is generally not concerned with the validity of the contract or any usage.`,
+        example: `Domestic law governs questions of contractual validity, capacity, and illegality.`,
+        synonyms: `authentic, enforceable, admissible, lawful`,
+        cisgRef: `Art. 4(a)`,
+        part: `part1`
+      },
+      {
+        id: `property`,
+        term: `Property`,
+        persian: `دارایی، مال، حق مالکیت، ملک`,
+        category: `Formation & Scope`,
+        definition: `Possessions or title to goods. While the seller must transfer property (Art. 30), the effect of the contract on property in the goods sold is outside CISG scope (Art. 4(b)).`,
+        example: `Passing of risk under Articles 66–70 operates independently of the transfer of property.`,
+        synonyms: `possessions, ownership, title, goods`,
+        cisgRef: `Arts. 4(b), 30`,
+        part: `part1`
+      },
+      {
+        id: `custom`,
+        term: `Custom / Usage`,
+        persian: `عرف، رسم، عادت، سنت`,
+        category: `Formation & Scope`,
+        definition: `A traditional and widely observed trade practice. Under Article 9, parties are bound by agreed usages, established practices, and widely known international trade usages.`,
+        example: `Customary practices in the maritime timber trade impliedly govern packaging standards.`,
+        synonyms: `tradition, practice, usage, observance`,
+        cisgRef: `Art. 9`,
+        part: `part1`
+      },
+      {
+        id: `intent`,
+        term: `Intent`,
+        persian: `قصد، نیت`,
+        category: `Formation & Scope`,
+        definition: `The mental objective behind a statement or act. Article 8(1) interprets statements according to subjective intent where the other party knew or could not have been unaware of it.`,
+        example: `An offer must indicate the intention of the offeror to be bound in case of acceptance.`,
+        synonyms: `aim, purpose, objective, will`,
+        cisgRef: `Arts. 8, 14`,
+        part: `part1`
+      },
+      {
+        id: `substantive`,
+        term: `Substantive`,
+        persian: `ذاتی، اساسی، ماهوی`,
+        category: `Formation & Scope`,
+        definition: `Relating to core rights and duties rather than procedural mechanics. The CISG establishes uniform substantive rules for international sales contracts.`,
+        example: `Parties may choose the substantive domestic law of a Contracting State to opt out of the CISG.`,
+        synonyms: `essential, material, fundamental`,
+        cisgRef: `Sec. Note 12`,
+        part: `part1`
+      },
+      {
+        id: `offer`,
+        term: `Offer / Offeror`,
+        persian: `پیشنهاد، ایجاب / پیشنهاد دهنده`,
+        category: `Formation & Scope`,
+        definition: `A sufficiently definite proposal addressed to specific persons indicating intention to be bound upon acceptance (Art. 14).`,
+        example: `An offer becomes effective when it reaches the offeree under Article 15(1).`,
+        synonyms: `proposal, proposition, submission, proffer`,
+        cisgRef: `Arts. 14–17`,
+        part: `part2`
+      },
+      {
+        id: `offeree`,
+        term: `Offeree`,
+        persian: `پیشنهاد گیرنده، طرف ایجاب`,
+        category: `Formation & Scope`,
+        definition: `The party to whom an offer is communicated and who holds the power to accept, reject, or make a counter-offer.`,
+        example: `An offer cannot be revoked if the offeree reasonably relied on it as irrevocable.`,
+        synonyms: `recipient, addressee, transferee`,
+        cisgRef: `Arts. 15–18`,
+        part: `part2`
+      },
+      {
+        id: `definite`,
+        term: `Definite`,
+        persian: `معین، مشخص، قطعی، معلوم`,
+        category: `Formation & Scope`,
+        definition: `Precise and explicit. Under Article 14(1), a proposal is sufficiently definite if it indicates the goods and fixes or provides for determining quantity and price.`,
+        example: `The proposal lacked definite terms on quantity and was treated as an invitation to make offers.`,
+        synonyms: `precise, explicit, express, specific`,
+        cisgRef: `Art. 14(1)`,
+        part: `part2`
+      },
+      {
+        id: `purport`,
+        term: `Purport`,
+        persian: `وانمود کردن، ظاهرا حاکی بودن، مفاد، مدلول`,
+        category: `Formation & Scope`,
+        definition: `To appear or claim to be or do something. Article 19 addresses a reply which purports to be an acceptance but contains additions or modifications.`,
+        example: `A reply purporting to accept while altering the dispute settlement clause is a counter-offer.`,
+        synonyms: `claim, profess, appear, sense`,
+        cisgRef: `Art. 19(1)–(2)`,
+        part: `part2`
+      },
+      {
+        id: `modify`,
+        term: `Modify / Modification`,
+        persian: `اصلاح کردن، تغییر دادن، تعدیل کردن`,
+        category: `Formation & Scope`,
+        definition: `To alter or amend contractual terms. Under Article 29, a contract may be modified or terminated by the mere agreement of the parties.`,
+        example: `Written contracts with a no-oral-modification clause require modification in writing.`,
+        synonyms: `alteration, change, revision, amendment`,
+        cisgRef: `Arts. 19, 29`,
+        part: `part2`
+      },
+      {
+        id: `consideration`,
+        term: `Consideration`,
+        persian: `عوض، عوضین، ثمن، بدل (سبب قرارداد)`,
+        category: `Formation & Scope`,
+        definition: `In common law, the mutual exchange of promises or value required for contract formation or modification. Unlike common law, CISG Art. 29(1) requires no consideration to modify a contract.`,
+        example: `A seller and buyer may reduce the contract price by mere agreement without fresh consideration.`,
+        synonyms: `payment, fee, compensation, exchange`,
+        cisgRef: `Art. 29(1)`,
+        part: `part3`
+      },
+      {
+        id: `bind`,
+        term: `Bind / Binding`,
+        persian: `ملزم کردن، متعهد کردن / الزام آور`,
+        category: `Performance & Risk`,
+        definition: `To legally obligate or constrain a party to perform contractual or treaty commitments.`,
+        example: `A State may declare under Article 92 that it will not be bound by Part II or Part III.`,
+        synonyms: `obligate, constrain, commit, enforceable`,
+        cisgRef: `Arts. 9, 14, 92`,
+        part: `part1`
+      },
+      {
+        id: `seller`,
+        term: `Seller`,
+        persian: `فروشنده، بایع`,
+        category: `Performance & Risk`,
+        definition: `The party obliged to deliver the goods, hand over any documents relating to them, and transfer the property in the goods as required by the contract and CISG (Art. 30).`,
+        example: `The seller must deliver goods free from third-party intellectual property claims under Article 42.`,
+        synonyms: `vendor, supplier, trader`,
+        cisgRef: `Arts. 30–52`,
+        part: `part3`
+      },
+      {
+        id: `buyer`,
+        term: `Buyer`,
+        persian: `خریدار، مشتری`,
+        category: `Performance & Risk`,
+        definition: `The party obliged to pay the price for the goods and take delivery of them as required by the contract and CISG (Art. 53).`,
+        example: `The buyer must examine the goods within as short a period as practicable under Article 38.`,
+        synonyms: `purchaser, vendee, customer, client`,
+        cisgRef: `Arts. 53–65`,
+        part: `part3`
+      },
+      {
+        id: `performance`,
+        term: `Performance`,
+        persian: `ایفای تعهد، انجام، اجرا`,
+        category: `Performance & Risk`,
+        definition: `The execution or discharge of contractual obligations. Both parties may require performance (Arts. 46, 62) or suspend performance upon prospective non-performance (Art. 71).`,
+        example: `A party suspending performance must immediately give notice to the other party.`,
+        synonyms: `execution, discharge, fulfillment`,
+        cisgRef: `Arts. 28, 46, 62, 71`,
+        part: `part3`
+      },
+      {
+        id: `defect`,
+        term: `Defect`,
+        persian: `عیب، نقص`,
+        category: `Performance & Risk`,
+        definition: `An imperfection or non-conformity in goods (apparent defect vs. latent/hidden defect). The seller is liable for lack of conformity existing when risk passes (Art. 36).`,
+        example: `If the seller knew of a latent defect and did not disclose it, Article 40 bars reliance on notice cut-offs.`,
+        synonyms: `fault, flaw, imperfection, non-conformity`,
+        cisgRef: `Arts. 35–40`,
+        part: `part3`
+      },
+      {
+        id: `inspect`,
+        term: `Inspect / Examine`,
+        persian: `بازرسی کردن، وارسی کردن، معاینه کردن`,
+        category: `Performance & Risk`,
+        definition: `To examine goods to verify conformity with contract specifications. Buyer must examine promptly (Art. 38) and generally has a right to examine before paying (Art. 58(3)).`,
+        example: `Where carriage is involved, examination may be deferred until arrival at destination.`,
+        synonyms: `examine, check, investigate, verify`,
+        cisgRef: `Arts. 38, 58(3)`,
+        part: `part3`
+      },
+      {
+        id: `notice`,
+        term: `Notice`,
+        persian: `اطلاع دادن، ابلاغ کردن، اخطاریه، اعلامیه`,
+        category: `Performance & Risk`,
+        definition: `A formal communication required to preserve or exercise rights. CISG requires notice for avoidance (Art. 26), non-conformity (Art. 39, max 2 years), suspension (Art. 71), and resale (Art. 88).`,
+        example: `Under Article 27, a notice given by appropriate means remains effective despite transmission delay.`,
+        synonyms: `announcement, declaration, notification`,
+        cisgRef: `Arts. 26, 27, 39, 71`,
+        part: `part3`
+      },
+      {
+        id: `carrier`,
+        term: `Carrier & Shipper`,
+        persian: `متصدی حمل و نقل و فرستنده کالا`,
+        category: `Performance & Risk`,
+        definition: `A carrier transports goods for hire. Under Article 67, when a sale involves carriage without a fixed delivery place, risk passes upon handover to the first carrier.`,
+        example: `Risk passed to the buyer once the marked containers were handed over to the first maritime carrier.`,
+        synonyms: `transporter, freight forwarder, shipping line`,
+        cisgRef: `Arts. 31(a), 32, 67`,
+        part: `part3`
+      },
+      {
+        id: `bill`,
+        term: `Bill of Lading / Invoice`,
+        persian: `بارنامه، صورتحساب، برات`,
+        category: `Performance & Risk`,
+        definition: `Commercial documents relating to goods (Art. 34). Even if the seller retains documents controlling disposition of the goods, risk still passes under Article 67(1).`,
+        example: `The seller handed over the clean bill of lading and commercial invoice before the payment date.`,
+        synonyms: `invoice, account, shipping document`,
+        cisgRef: `Arts. 34, 58, 67(1)`,
+        part: `part3`
+      },
+      {
+        id: `discharge`,
+        term: `Discharge`,
+        persian: `بری الذمه کردن، آزاد کردن، ایفا کردن، لغو کردن`,
+        category: `Performance & Risk`,
+        definition: `To release from an obligation or perform it in full. Under Article 66, loss after risk passes does not discharge the buyer from paying the price unless caused by the seller.`,
+        example: `Avoidance releases both parties from future obligations, though accrued damages survive.`,
+        synonyms: `release, absolve, perform, complete`,
+        cisgRef: `Arts. 66, 81`,
+        part: `part3`
+      },
+      {
+        id: `breach`,
+        term: `Breach`,
+        persian: `نقض، تخلف`,
+        category: `Breach & Remedies`,
+        definition: `Failure to perform a contractual or statutory obligation. Under Article 25, a fundamental breach substantially deprives the aggrieved party of its contractual expectation.`,
+        example: `Delivery of substitute goods under Article 46(2) requires a fundamental breach.`,
+        synonyms: `violation, infringement, non-compliance`,
+        cisgRef: `Arts. 25, 45, 61`,
+        part: `part3`
+      },
+      {
+        id: `foresee`,
+        term: `Foresee / Foreseeability`,
+        persian: `پیش بینی کردن، از پیش دانستن`,
+        category: `Breach & Remedies`,
+        definition: `To anticipate a result before it occurs. Foreseeability limits both fundamental breach (Art. 25) and recoverable damages (Art. 74).`,
+        example: `Damages may not exceed the loss the breaching party foresaw or ought to have foreseen at contract conclusion.`,
+        synonyms: `anticipate, predict, expect, envisage`,
+        cisgRef: `Arts. 25, 74, 79`,
+        part: `part3`
+      },
+      {
+        id: `remedy`,
+        term: `Remedy`,
+        persian: `جبران کردن، رفع کردن، وسایل جبران خسارت، دادخواهی`,
+        category: `Breach & Remedies`,
+        definition: `A legal means of redress for breach of contract: requiring performance, price reduction, avoidance, and claiming damages (Arts. 45–52, 61–65).`,
+        example: `Claiming performance or avoidance does not deprive an aggrieved party of the right to claim damages.`,
+        synonyms: `redress, reparation, compensation, relief`,
+        cisgRef: `Arts. 45–52, 61–65`,
+        part: `part3`
+      },
+      {
+        id: `rescind`,
+        term: `Rescind / Rescission`,
+        persian: `لغو کردن، فسخ کردن، کان لم یکن کردن (قرارداد)`,
+        category: `Breach & Remedies`,
+        definition: `To annul, abrogate, or cancel a contract. In the CISG, termination for breach is termed “avoidance” and requires notice under Article 26.`,
+        example: `The buyer declared the contract avoided after the seller failed to deliver within the Nachfrist period.`,
+        synonyms: `avoid, revoke, cancel, abrogate`,
+        cisgRef: `Arts. 26, 49, 64, 81`,
+        part: `part3`
+      },
+      {
+        id: `repudiate`,
+        term: `Repudiate`,
+        persian: `رد و نفی کردن، انکار کردن، نکول کردن`,
+        category: `Breach & Remedies`,
+        definition: `To reject or declare an intention not to perform contractual duties. Under Article 72(3), prior notice before anticipatory avoidance is unnecessary if the other party declares it will not perform.`,
+        example: `When the supplier repudiated the contract before the shipment date, the buyer avoided immediately.`,
+        synonyms: `decline, refuse, reject, renounce`,
+        cisgRef: `Arts. 72(3), 49(1)(b)`,
+        part: `part3`
+      },
+      {
+        id: `mitigation`,
+        term: `Mitigation of damages`,
+        persian: `تقلیل خسارت، جلوگیری از تشدید خسارت`,
+        category: `Breach & Remedies`,
+        definition: `The duty of an aggrieved party to take reasonable measures to limit loss resulting from a breach (Art. 77). Failing to mitigate allows the breaching party to claim a reduction in damages.`,
+        example: `A party cannot recover damages that could have been avoided through reasonable substitute arrangements.`,
+        synonyms: `avoidable consequences, loss limitation`,
+        cisgRef: `Art. 77`,
+        part: `part3`
+      },
+      {
+        id: `force-majeure`,
+        term: `Force majeure / Impediment`,
+        persian: `فورس ماژور، قوه قهریه، قوه قاهره، حادثه غیرمترقبه`,
+        category: `Breach & Remedies`,
+        definition: `An extraordinary, unforeseeable impediment beyond a party’s control. Under Article 79, it exempts the party from paying damages during the impediment, while preserving other remedies.`,
+        example: `An unforeseen export ban beyond the seller’s control may exempt damages liability under Article 79.`,
+        synonyms: `act of God, unavoidable casualty, impediment`,
+        cisgRef: `Art. 79`,
+        part: `part3`
+      },
+      {
+        id: `restitution`,
+        term: `Restitution`,
+        persian: `اعاده مال (به صاحب اصلی)، استرداد، جبران خسارت`,
+        category: `Breach & Remedies`,
+        definition: `Restoration of what has been supplied or paid upon avoidance (Art. 81(2)). Under Article 82, a buyer generally loses the right to avoid if unable to make restitution substantially unchanged.`,
+        example: `Upon avoidance, the seller must refund the price with interest from the date of payment (Art. 84).`,
+        synonyms: `return, restoration, reimbursement`,
+        cisgRef: `Arts. 81–84`,
+        part: `part3`
+      },
+      {
+        id: `waive`,
+        term: `Waive`,
+        persian: `صرفنظر کردن، ترک کردن، اسقاط کردن`,
+        category: `Breach & Remedies`,
+        definition: `To voluntarily relinquish a known legal right or objection. Under Article 29(2), conduct relied upon by the other party may preclude asserting a written-modification clause.`,
+        example: `Buyers may waive strict conformity objections if they fail to notify within Article 39 limits.`,
+        synonyms: `relinquish, abandon, surrender, set aside`,
+        cisgRef: `Arts. 29(2), 39`,
+        part: `part3`
+      },
+      {
+        id: `treaty`,
+        term: `Treaty`,
+        persian: `عهدنامه، معاهده، پیمان، میثاق`,
+        category: `Treaties & Dispute`,
+        definition: `A formally concluded and ratified international agreement between States. Article 90 states the CISG does not prevail over certain conflicting international agreements.`,
+        example: `A multilateral treaty requires ratification, acceptance, approval, or accession (Art. 91).`,
+        synonyms: `convention, pact, agreement, protocol`,
+        cisgRef: `Arts. 90, 91`,
+        part: `part4`
+      },
+      {
+        id: `declaration`,
+        term: `Declaration`,
+        persian: `بیانیه، اعلامیه، اظهارنامه`,
+        category: `Treaties & Dispute`,
+        definition: `A formal explicit statement. In CISG, used both for a party’s notice of avoidance (Art. 26) and for authorized State reservations/declarations under Articles 92–96.`,
+        example: `Under Article 98, no reservations are permitted except those expressly authorized in the Convention.`,
+        synonyms: `announcement, reservation, statement`,
+        cisgRef: `Arts. 26, 92–98`,
+        part: `part4`
+      },
+      {
+        id: `arbitration`,
+        term: `Arbitration`,
+        persian: `داوری، حکمیت`,
+        category: `Treaties & Dispute`,
+        definition: `Resolution of disputes by an independent arbitrator or tribunal rather than state courts. Avoidance does not affect contract provisions for dispute settlement (Art. 81(1)).`,
+        example: `UNCITRAL arbitration tribunals routinely apply the CISG as governing substantive law.`,
+        synonyms: `adjudication, conciliation, mediation`,
+        cisgRef: `Arts. 45(3), 81(1)`,
+        part: `part3`
+      },
+      {
+        id: `pacta-sunt-servanda`,
+        term: `Pacta sunt servanda`,
+        persian: `اصل وفای به عهد (قراردادها باید محترم شمرده شوند)`,
+        category: `Treaties & Dispute`,
+        definition: `Foundational principle of contract and international treaty law holding that agreements are binding upon the parties and must be performed in good faith.`,
+        example: `Both binding contracts (Art. 23) and ratified treaties reflect pacta sunt servanda.`,
+        synonyms: `sanctity of contracts, binding force`,
+        cisgRef: `Arts. 7, 23, 29`,
+        part: `part2`
+      }
+    ];
+
+    // =========================================================================
+    // DATA: CISG PARTS I–IV + SECRETARIAT EXPLANATORY NOTES (22 Units)
+    // =========================================================================
+    const CISG_MODULES = [
+      {
+        id: `unit-preamble`,
+        part: `part1`,
+        partLabel: `Preamble & Overview`,
+        articles: `Preamble · Context`,
+        title: `Origins, Uniformity & Complementary Limitation Convention`,
+        summary: `Adopted on 11 April 1980 in Vienna, the CISG establishes uniform {{substantive}} law for international sales across diverse social, economic, and legal systems, building on earlier {{treaty}} drafts by UNIDROIT.`,
+        rules: [
+          `Entered into force on 1 January 1988 for 11 original States (Argentina, China, Egypt, France, Hungary, Italy, Lesotho, Syria, United States, Yugoslavia, Zambia); 76 States parties by Sept 2010.`,
+          `Six equally authentic texts: Arabic, Chinese, English, French, Russian, and Spanish.`,
+          `Complemented by the 1974 UN Limitation Convention as amended by the 1980 Protocol aligning its scope with the CISG.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 1–6, 38): UNIDROIT began work in 1930 leading to the 1964 Hague Conventions (Formation and Sales). UNCITRAL unified both into the CISG to achieve broader global acceptability across legal systems.`,
+        terms: [`substantive`, `treaty`]
+      },
+      {
+        id: `unit-art1`,
+        part: `part1`,
+        partLabel: `Part I · Ch. I`,
+        articles: `Article 1`,
+        title: `Sphere of Application: Different States & Private International Law`,
+        summary: `Applies to contracts of sale of goods between parties whose places of business are in different States when both are Contracting States (1)(a), or when private international law leads to a Contracting State’s law (1)(b).`,
+        rules: [
+          `Different-State status is disregarded if it does not appear from the contract, dealings, or disclosed information at or before conclusion (Art. 1(2)).`,
+          `Neither nationality of the parties nor their civil or commercial character affects application (Art. 1(3)).`
+        ],
+        secretariatNote: `Secretariat Note (Para. 7): States may make an Article 95 declaration declining Art. 1(1)(b). The CISG may also apply if chosen by the parties, subject to mandatory limits of otherwise applicable law.`,
+        terms: [`good-faith`, `treaty`]
+      },
+      {
+        id: `unit-art2-3`,
+        part: `part1`,
+        partLabel: `Part I · Ch. I`,
+        articles: `Articles 2–3`,
+        title: `Excluded Sales & Manufacturing vs. Service Contracts`,
+        summary: `Article 2 lists sales {{exclude}}d by purpose, sale method, or nature of goods; Article 3 separates sales of goods to be manufactured from contracts predominantly for labour or services.`,
+        rules: [
+          `Excluded under Art. 2: (a) personal/family/household use (unless seller neither knew nor ought to have known); (b) auctions; (c) execution/authority of law; (d) stocks, shares, securities, money; (e) ships, vessels, hovercraft, aircraft; (f) electricity.`,
+          `Art. 3(1): Manufacturing contracts are sales unless the ordering party undertakes to supply a substantial part of the necessary materials.`,
+          `Art. 3(2): Excluded if the preponderant part of the supplier’s obligations consists in supplying labour or other services.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 9–10): Excluded categories reflect special domestic regulatory regimes; Article 3 sets two clear tests (substantial materials and preponderant labour/services) to distinguish sales from service contracts.`,
+        terms: [`exclude`, `substantive`]
+      },
+      {
+        id: `unit-art4-6`,
+        part: `part1`,
+        partLabel: `Part I · Ch. I`,
+        articles: `Articles 4–6`,
+        title: `Substantive Boundaries & Party Autonomy`,
+        summary: `The CISG governs only contract formation and buyer/seller obligations—not contractual {{valid}}ity or transfer of {{property}} (Art. 4), nor death/personal injury (Art. 5)—and recognizes broad autonomy to {{exclude}} or vary rules (Art. 6).`,
+        rules: [
+          `Art. 4(a)–(b): Leaves validity of contract/usages and effect on property title in the goods to domestic law.`,
+          `Art. 5: Excludes seller liability for death or personal injury caused by the goods to any person.`,
+          `Art. 6: Parties may exclude the CISG altogether or derogate from/vary any provision (subject only to Art. 12).`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 11–12): Party autonomy is foundational. Exclusion occurs if parties select a non-Contracting State’s law or the substantive domestic law of a Contracting State; derogation occurs when a contract clause sets a different rule.`,
+        terms: [`valid`, `property`, `exclude`]
+      },
+      {
+        id: `unit-art7-10`,
+        part: `part1`,
+        partLabel: `Part I · Ch. II`,
+        articles: `Articles 7–10`,
+        title: `Uniform Interpretation, Good Faith, Intent & Trade Usages`,
+        summary: `Requires interpretation respecting international character, uniformity, and {{good-faith}} (Art. 7), subjective/objective {{intent}} (Art. 8), agreed and international {{custom}}s/usages (Art. 9), and place of business (Art. 10).`,
+        rules: [
+          `Art. 7(2): Unsettled matters governed by CISG are resolved by its general principles first, and only absent those by private international law.`,
+          `Art. 8(1)–(2): Subjective intent governs if known/unmistakable to other party; otherwise the understanding of a reasonable person in the same circumstances.`,
+          `Art. 9(1)–(2): Parties are bound by agreed usages, established practices, and impliedly by widely known and regularly observed international trade usages.`,
+          `Art. 10: If multiple places of business exist, the one with closest relationship to contract and performance governs.`
+        ],
+        secretariatNote: `Secretariat Note (Para. 13): Domestic courts and arbitral tribunals are admonished against homeward-trend interpretation; gaps must be filled internally via CISG general principles before turning to conflict-of-laws rules.`,
+        terms: [`good-faith`, `intent`, `custom`]
+      },
+      {
+        id: `unit-art11-13`,
+        part: `part1`,
+        partLabel: `Part I · Ch. II`,
+        articles: `Articles 11–13`,
+        title: `Freedom of Form & Article 96 Written-Form Exception`,
+        summary: `Contracts need not be concluded in or evidenced by writing (Art. 11), unless a party has its place of business in a State making an Article 96 {{declaration}} (Art. 12).`,
+        rules: [
+          `Art. 11: No writing required; contract may be proved by any means, including witnesses.`,
+          `Art. 12: Where an Art. 96 declaration applies, Art. 11, Art. 29, and Part II non-writing rules do not apply—and parties may not derogate from Art. 12.`,
+          `Art. 13: “Writing” expressly includes telegram and telex.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 15–16): Freedom from form formalities accommodates rapid international trade, while Article 12/96 preserves domestic written-form legislation for declaring States.`,
+        terms: [`declaration`, `bind`]
+      },
+      {
+        id: `unit-art14-17`,
+        part: `part2`,
+        partLabel: `Part II · Formation`,
+        articles: `Articles 14–17`,
+        title: `The Offer: Definiteness, Withdrawal, Revocation & Rejection`,
+        summary: `An {{offer}} must be addressed to specific persons, be sufficiently {{definite}}, and show {{intent}} to be bound (Art. 14). It takes effect upon reaching the {{offeree}} (Art. 15) and may be revoked before acceptance dispatch unless irrevocable (Art. 16).`,
+        rules: [
+          `Art. 14(1)–(2): Definite = indicates goods and fixes/provides for quantity and price. Public proposals are merely invitations to make offers unless clearly stated otherwise.`,
+          `Art. 15(2): Even an irrevocable offer can be withdrawn if withdrawal reaches the offeree before or with the offer.`,
+          `Art. 16(2): Irrevocable if stating a fixed time/irrevocability, OR if reasonable for offeree to rely and offeree acted in reliance.`,
+          `Art. 17: Even an irrevocable offer terminates when a rejection reaches the offeror.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 17–19): Article 16 takes a compromise middle position between common-law revocability and civil-law irrevocability—allowing revocation until dispatch of acceptance, tempered by reliance and fixed-time exceptions.`,
+        terms: [`offer`, `definite`, `intent`, `offeree`]
+      },
+      {
+        id: `unit-art18-19`,
+        part: `part2`,
+        partLabel: `Part II · Formation`,
+        articles: `Articles 18–19`,
+        title: `Acceptance & Replies with Modified Terms (Art. 19)`,
+        summary: `Assent by statement or conduct (never silence alone) becomes effective on reaching the offeror (Art. 18). A reply that {{purport}}s to accept but adds material changes is a counter-offer; non-material additions bind unless objected to (Art. 19).`,
+        rules: [
+          `Art. 18(2)–(3): Receipt rule for acceptance (oral offers require immediate acceptance). Acceptance by performing an act (dispatch/payment) without notice is effective when performed if allowed by offer/practice/usage.`,
+          `Art. 19(2): Non-material additions become part of the contract unless offeror objects orally or by notice without undue delay.`,
+          `Art. 19(3): Material alterations include price, payment, quality, quantity, place/time of delivery, extent of liability, and dispute settlement.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 20–22): Article 19 addresses the battle-of-the-forms problem by distinguishing material alterations (counter-offer) from non-material modifications (acceptance absent prompt objection).`,
+        terms: [`purport`, `modify`, `pacta-sunt-servanda`]
+      },
+      {
+        id: `unit-art20-24`,
+        part: `part2`,
+        partLabel: `Part II · Formation`,
+        articles: `Articles 20–24`,
+        title: `Acceptance Periods, Late Acceptance & Contract Conclusion`,
+        summary: `Fixes when acceptance clocks begin (Art. 20), validates late acceptance upon prompt notice or normal transmission delay (Art. 21), allows withdrawal before effectiveness (Art. 22), and pinpoints conclusion when acceptance reaches the offeror (Arts. 23–24).`,
+        rules: [
+          `Art. 20(1)–(2): Telegram/letter periods run from handing-in or letter date; instantaneous communication runs from receipt. Last-day holidays at offeror’s place extend to the next business day.`,
+          `Art. 21(1)–(2): Offeror may validate a late acceptance by prompt notice; if writing shows normal transmission would have arrived on time, it is effective unless offeror promptly declares lapse.`,
+          `Art. 24: “Reaches” means made orally or delivered personally, to place of business/mailing address, or habitual residence.`
+        ],
+        secretariatNote: `Secretariat Note (Para. 17): Formation concludes at the exact moment an acceptance becomes effective under Part II—creating a binding contract under Article 23.`,
+        terms: [`offer`, `offeree`, `notice`]
+      },
+      {
+        id: `unit-art25-29`,
+        part: `part3`,
+        partLabel: `Part III · Ch. I`,
+        articles: `Articles 25–29`,
+        title: `Fundamental Breach, Notice Dispatch & Oral Modification Estoppel`,
+        summary: `Defines fundamental {{breach}} via substantial deprivation and {{foresee}}ability (Art. 25), requires {{notice}} to avoid (Art. 26), adopts the dispatch rule for Part III notices (Art. 27), and allows {{modify}}ing contracts without {{consideration}} (Art. 29).`,
+        rules: [
+          `Art. 25: Fundamental breach occurs if detriment substantially deprives the other party of contractual expectations, unless unforeseen and unforeseeable by a reasonable person.`,
+          `Art. 26–27: Avoidance requires notice; once a Part III notice is sent by appropriate means, transmission delay/error does not deprive the sender of its right.`,
+          `Art. 28: Courts are not bound to order specific performance unless they would do so under domestic law.`,
+          `Art. 29(1)–(2): Mere agreement modifies/terminates; a written no-oral-modification clause holds unless conduct induced reliance.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 15, 29): Fundamental breach is the central gatekeeper limiting drastic remedies like avoidance and substitute goods.`,
+        terms: [`breach`, `foresee`, `notice`, `modify`, `consideration`]
+      },
+      {
+        id: `unit-art30-34`,
+        part: `part3`,
+        partLabel: `Part III · Ch. II.I`,
+        articles: `Articles 30–34`,
+        title: `Seller’s Delivery Duties & Handing Over of Documents`,
+        summary: `The {{seller}} must deliver the goods, hand over documents, and transfer {{property}} (Art. 30), arrange appropriate carriage and insurance info (Art. 32), meet delivery dates (Art. 33), and cure early document {{defect}}s (Art. 34).`,
+        rules: [
+          `Art. 31: Absent fixed place, delivery occurs upon handing over to first carrier (if carriage involved), placing at disposal at known location of specific/manufactured goods, or at seller’s place of business.`,
+          `Art. 32: Seller must give notice of consignment if goods are unidentified and provide insurance information upon buyer’s request.`,
+          `Art. 34: Documents handed over early may be cured up to the contractual deadline without unreasonable inconvenience/expense.`
+        ],
+        secretariatNote: `Secretariat Note (Para. 23): Articles 31–34 provide comprehensive supplementary rules whenever the international sales contract is silent on place, time, or manner of delivery.`,
+        terms: [`seller`, `property`, `bill`, `carrier`]
+      },
+      {
+        id: `unit-art35-40`,
+        part: `part3`,
+        partLabel: `Part III · Ch. II.II`,
+        articles: `Articles 35–40`,
+        title: `Conformity of Goods, Examination & Two-Year Notice Cut-Off`,
+        summary: `Goods must match contractual quantity, quality, description, and packaging plus implied fitness standards (Art. 35). The {{buyer}} must {{inspect}} promptly (Art. 38) and give {{notice}} of any {{defect}} within a reasonable time and at most two years (Art. 39).`,
+        rules: [
+          `Art. 35(2)–(3): Fitness for ordinary use, known particular purpose, sample/model, and usual/adequate packaging—unless buyer knew or could not have been unaware at conclusion.`,
+          `Art. 36–37: Seller is liable for defects existing when risk passes (or covered by guarantee); seller may cure early deliveries up to delivery date.`,
+          `Art. 38: Prompt examination (deferred to destination if carriage or redirection in transit applies).`,
+          `Art. 39–40: Failure to notify specifying defect nature within reasonable time (or 2-year absolute cut-off) bars reliance—unless seller knew/could not be unaware and concealed facts (Art. 40).`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 24–25): The two-year outer limit in Article 39(2) yields only if inconsistent with an express contractual guarantee period.`,
+        terms: [`buyer`, `inspect`, `notice`, `defect`]
+      },
+      {
+        id: `unit-art41-44`,
+        part: `part3`,
+        partLabel: `Part III · Ch. II.II`,
+        articles: `Articles 41–44`,
+        title: `Third-Party Rights & Intellectual Property Claims`,
+        summary: `Goods must be free from third-party rights/claims (Art. 41) and industrial/intellectual property claims in the contemplated resale State or buyer’s State (Art. 42), subject to {{notice}} (Art. 43) and reasonable-excuse relief (Art. 44).`,
+        rules: [
+          `Art. 42(1)–(2): Seller is liable for IP claims it knew or could not have been unaware of at conclusion under resale State law (or buyer’s State law)—unless buyer knew or furnished the technical drawings/designs.`,
+          `Art. 43: Buyer must notify seller of third-party claim within reasonable time after becoming aware.`,
+          `Art. 44: If buyer has a reasonable excuse for missing Art. 39(1) or 43(1) notice, buyer retains price reduction (Art. 50) and damages except loss of profit.`
+        ],
+        secretariatNote: `Secretariat Note (Para. 24): IP protection in Article 42 is territorially calibrated to the contemplated State of resale/use or the buyer’s place of business.`,
+        terms: [`seller`, `buyer`, `notice`]
+      },
+      {
+        id: `unit-art45-52`,
+        part: `part3`,
+        partLabel: `Part III · Ch. II.III`,
+        articles: `Articles 45–52`,
+        title: `Buyer’s Remedies: Performance, Nachfrist, Cure, Avoidance & Price Reduction`,
+        summary: `Sets the {{buyer}}’s {{remedy}} toolkit: require {{performance}}/substitute/repair (Art. 46), fix a Nachfrist period (Art. 47), accommodate seller’s post-date cure (Art. 48), avoid (Art. 49), or reduce price proportionally (Art. 50).`,
+        rules: [
+          `Art. 45(2)–(3): Claiming other remedies never bars damages; no court or arbitral tribunal may grant a period of grace.`,
+          `Art. 46(2)–(3): Substitute goods require fundamental breach; repair is available unless unreasonable.`,
+          `Art. 47 & 49: Avoidance allowed for fundamental breach OR non-delivery after an Art. 47 additional period (Nachfrist).`,
+          `Art. 50: Proportional price reduction based on delivered value vs. conforming value at delivery (blocked if seller cures under Art. 37/48).`,
+          `Art. 51–52: Partial delivery/non-conformity remedies apply to affected part; buyer may refuse early delivery or excess quantity.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 27–30): Remedies are grouped immediately following each party’s obligations for clarity; Article 49 pairs fundamental breach with Nachfrist non-delivery as the two triggers for avoidance.`,
+        terms: [`buyer`, `remedy`, `performance`, `rescind`]
+      },
+      {
+        id: `unit-art53-65`,
+        part: `part3`,
+        partLabel: `Part III · Ch. III`,
+        articles: `Articles 53–65`,
+        title: `Buyer’s Obligations (Payment & Delivery) & Seller’s Remedies`,
+        summary: `The {{buyer}} must pay the price and take delivery (Art. 53–60), generally with a right to {{inspect}} before paying (Art. 58(3)). Seller {{remedy}} options mirror buyer’s (Arts. 61–65), including seller specification (Art. 65).`,
+        rules: [
+          `Art. 54–59: Buyer must satisfy payment formalities; open-price contracts refer to generally charged price (Art. 55); payment due at seller’s place or handover place without formal demand (Arts. 57, 59).`,
+          `Art. 60: Taking delivery means cooperating to enable delivery and physically taking over goods.`,
+          `Arts. 61–64: Seller may require payment/delivery, fix an Art. 63 Nachfrist period, avoid for fundamental breach or Nachfrist default (Art. 64), and claim damages.`,
+          `Art. 65: If buyer fails to specify features/measurements, seller may make specification and give buyer a window to object.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 26–29): Seller remedies parallel buyer remedies in structure—performance, Nachfrist, avoidance, and damages—with no judicial period of grace (Art. 61(3)).`,
+        terms: [`buyer`, `inspect`, `remedy`, `performance`]
+      },
+      {
+        id: `unit-art66-70`,
+        part: `part3`,
+        partLabel: `Part III · Ch. IV`,
+        articles: `Articles 66–70`,
+        title: `Passing of Risk: Carriage, Goods in Transit & Residual Rules`,
+        summary: `Post-risk loss does not {{discharge}} the buyer from paying the price unless caused by the seller (Art. 66). Risk passes on handover to first {{carrier}} (Art. 67), at conclusion for goods in transit (Art. 68), or upon takeover/disposal (Art. 69).`,
+        rules: [
+          `Art. 67(1)–(2): In carriage contracts, risk passes at handover to first carrier (or particular place carrier), even if seller retains controlling {{bill}}s—but goods must be clearly identified to the contract.`,
+          `Art. 68: Goods sold in transit pass risk at contract conclusion (or carrier handover if circumstances show), unless seller knew/ought to have known of prior loss/damage and concealed it.`,
+          `Art. 69: Otherwise, risk passes on takeover or when placed at disposal and buyer breaches by failing to take delivery.`,
+          `Art. 70: Seller’s fundamental breach leaves buyer’s remedies intact even after risk passes.`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 31–32): Parties often regulate risk via INCOTERMS; absent express terms, Articles 67–69 supply complete default rules conditioned on clear identification of goods.`,
+        terms: [`discharge`, `carrier`, `bill`]
+      },
+      {
+        id: `unit-art71-73`,
+        part: `part3`,
+        partLabel: `Part III · Ch. V.I`,
+        articles: `Articles 71–73`,
+        title: `Anticipatory Breach, Suspension & Instalment Contracts`,
+        summary: `Allows suspending {{performance}} with immediate {{notice}} if serious deficiency appears (Art. 71), avoiding prior to due date upon clear fundamental breach or {{repudiate}}d performance (Art. 72), and handling instalment defaults (Art. 73).`,
+        rules: [
+          `Art. 71: Party may suspend (and stop goods in transit) if other party will not perform a substantial part due to serious deficiency in ability/creditworthiness or conduct; must resume if adequate assurance is given.`,
+          `Art. 72: Prior avoidance requires clear fundamental breach and reasonable notice to allow assurance—unless other party declared it will not perform.`,
+          `Art. 73: Instalment contracts allow avoidance of single instalment, future instalments (if good grounds for future fundamental breach), or interdependent past/future deliveries.`
+        ],
+        secretariatNote: `Secretariat Note (Para. 33): Draws a careful line between temporary suspension (contract stays alive awaiting assurance) and anticipatory avoidance (contract terminated prior to performance date).`,
+        terms: [`performance`, `notice`, `repudiate`]
+      },
+      {
+        id: `unit-art74-78`,
+        part: `part3`,
+        partLabel: `Part III · Ch. V.II–III`,
+        articles: `Articles 74–78`,
+        title: `Damages, Foreseeability, Mitigation Duty & Interest`,
+        summary: `Damages cover full loss including lost profit up to {{foresee}}able limits (Art. 74), cover or market differentials after avoidance (Arts. 75–76), subject to {{mitigation}} of damages (Art. 77), plus interest on arrears (Art. 78).`,
+        rules: [
+          `Art. 74: Sum equal to loss including loss of profit, capped by what the breaching party foresaw or ought to have foreseen at contract conclusion.`,
+          `Art. 75–76: Upon avoidance, recover difference between contract price and reasonable substitute transaction (Art. 75) or current market price at takeover/avoidance (Art. 76).`,
+          `Art. 77: Aggrieved party must take reasonable measures to mitigate loss; failure allows reduction in damages.`,
+          `Art. 78: Interest accrues on unpaid price or sums in arrears without prejudice to Art. 74 damages.`
+        ],
+        secretariatNote: `Secretariat Note (Para. 30): A party cannot recover damages that could have been avoided through proper mitigation measures under Article 77.`,
+        terms: [`foresee`, `mitigation`, `remedy`]
+      },
+      {
+        id: `unit-art79-80`,
+        part: `part3`,
+        partLabel: `Part III · Ch. V.IV`,
+        articles: `Articles 79–80`,
+        title: `Exemptions (Impediment Beyond Control) & Creditor Causation`,
+        summary: `An unforeseeable, unavoidable impediment beyond a party’s control ({{force-majeure}}) exempts it from damages only (Art. 79); a party cannot rely on non-performance caused by its own act or omission (Art. 80).`,
+        rules: [
+          `Art. 79(1)–(4): Must prove impediment beyond control, unforeseeable at conclusion, and unavoidable/insurmountable; must give timely notice of the impediment.`,
+          `Art. 79(5): Exemption blocks damages ONLY—the other party retains rights to avoid, reduce price, or claim interest.`,
+          `Art. 80: Bars reliance on counterparty failure to the extent caused by the first party’s own act or omission.`
+        ],
+        secretariatNote: `Secretariat Note (Para. 30): Exemption from liability to pay damages under Article 79 is narrower than frustration—preserving non-damages remedies under Article 79(5).`,
+        terms: [`force-majeure`, `remedy`]
+      },
+      {
+        id: `unit-art81-84`,
+        part: `part3`,
+        partLabel: `Part III · Ch. V.V`,
+        articles: `Articles 81–84`,
+        title: `Effects of Avoidance & Restitution Obligations`,
+        summary: `Avoidance releases future duties while preserving {{arbitration}}/dispute clauses and damages, and triggers concurrent {{restitution}} (Art. 81). Impossibility of unchanged restitution limits buyer’s avoidance (Arts. 82–83) alongside interest accounting (Art. 84).`,
+        rules: [
+          `Art. 81(1)–(2): Avoidance does not nullify dispute settlement provisions; parties must make concurrent restitution of goods or price paid.`,
+          `Art. 82: Buyer loses right to avoid or demand substitute goods if unable to return goods in substantially the same condition—unless not due to buyer’s act/omission, caused by examination, or sold/consumed in normal course before discovering non-conformity.`,
+          `Art. 84: Seller must pay interest on refunded price from payment date; buyer must account for benefits derived from goods.`
+        ],
+        secretariatNote: `CISG Part III, Ch. V, Sec. V: Balances clean unwinding of avoided international sales with practical exceptions for inspection, perishability, and normal commercial resale prior to defect discovery.`,
+        terms: [`arbitration`, `restitution`, `discharge`]
+      },
+      {
+        id: `unit-art85-88`,
+        part: `part3`,
+        partLabel: `Part III · Ch. V.VI`,
+        articles: `Articles 85–88`,
+        title: `Preservation of the Goods, Warehousing & Mitigation Resale`,
+        summary: `Imposes mutual duties on seller (Art. 85) and buyer (Art. 86) to preserve goods belonging to the other party, permitting third-party warehousing (Art. 87) and resale after {{notice}} or rapid deterioration (Art. 88).`,
+        rules: [
+          `Art. 85–86: Party in possession (or buyer rejecting goods placed at disposal without payment/unreasonable inconvenience) must take reasonable preservation steps and may retain goods until reimbursed reasonable expenses.`,
+          `Art. 87: Goods may be deposited in a third-party warehouse at the other party’s expense if not unreasonable.`,
+          `Art. 88(1)–(3): May sell after unreasonable delay upon reasonable notice; MUST take reasonable measures to sell if subject to rapid deterioration or unreasonable expense—retaining expenses and accounting for balance.`
+        ],
+        secretariatNote: `Secretariat Note (Para. 35): Preservation duties are vital in cross-border sales where the counterparty lacks local agents in the country where goods sit.`,
+        terms: [`notice`, `mitigation`, `seller`, `buyer`]
+      },
+      {
+        id: `unit-part4`,
+        part: `part4`,
+        partLabel: `Part IV · Final Provisions`,
+        articles: `Articles 89–101`,
+        title: `Depositary, Authorized Declarations & Entry into Force`,
+        summary: `Designates the UN Secretary-General as depositary (Art. 89), preserves certain {{treaty}} agreements (Art. 90), and authorizes specific {{declaration}}s (Arts. 92–96) while prohibiting all other reservations (Art. 98).`,
+        rules: [
+          `Art. 92: States may declare not to be bound by Part II (Formation) or Part III (Sale of Goods).`,
+          `Art. 93–94: Federal territorial-unit declarations (Art. 93) and closely related legal-rules opt-out among neighboring States (Art. 94).`,
+          `Art. 95–96: Opt-out from Art. 1(1)(b) conflict-of-laws extension (Art. 95) and mandatory written-form declaration (Art. 96, paired with Art. 12).`,
+          `Arts. 97–101: Declarations/withdrawals take effect after 6 months; no unauthorized reservations (Art. 98); 12-month entry into force & denunciation periods; temporal scope (Art. 100).`
+        ],
+        secretariatNote: `Secretariat Note (Paras. 36–37): Allowing Part II or Part III exclusions under Article 92 enabled combining the two 1964 Hague Conventions into a single widely acceptable instrument.`,
+        terms: [`treaty`, `declaration`, `bind`]
+      }
+    ];
+
+    // =========================================================================
+    // DATA: INTERACTIVE QUIZ QUESTIONS (20 Questions across 5 Categories)
+    // =========================================================================
+    const QUIZ_DATA = [
+      // Part I (4)
+      {
+        id: `q1`,
+        category: `Part I`,
+        difficulty: `Core`,
+        question: `A German manufacturer sells industrial turbines to a buyer in a non-Contracting State. The contract states: “This contract is governed by German law.” Does the CISG apply?`,
+        options: [
+          `No, because only one party has its place of business in a Contracting State.`,
+          `Yes, via Article 1(1)(b) unless Germany made an Article 95 reservation or the parties specifically excluded the CISG.`,
+          `No, because industrial turbines are excluded goods under Article 2(e).`,
+          `Yes, automatically under Article 1(1)(a) regardless of the buyer’s location.`
+        ],
+        correctIndex: 1,
+        rationale: `Under Article 1(1)(b), the CISG applies when rules of private international law lead to the law of a Contracting State (Germany), unless that State made an Article 95 declaration or the parties excluded the CISG under Article 6 (choosing domestic German sales law rather than German law generally).`,
+        cisgRef: `CISG Arts. 1(1)(b), 6, 95`,
+        noteRef: `Secretariat Note Paras. 7, 12`,
+        termLink: `exclude`
+      },
+      {
+        id: `q2`,
+        category: `Part I`,
+        difficulty: `Core`,
+        question: `A buyer orders 5,000 custom-printed ceramic vessels and supplies 85% of the specialized raw clay and glazes required for production. Does the CISG govern this transaction?`,
+        options: [
+          `Yes, because manufactured goods are always treated as sales under Article 3(1).`,
+          `No, because under Article 3(1) the ordering party undertook to supply a substantial part of the necessary materials.`,
+          `Yes, provided the buyer’s labor contribution is less than 50%.`,
+          `No, because ceramic vessels are consumer goods under Article 2(a).`
+        ],
+        correctIndex: 1,
+        rationale: `Article 3(1) treats contracts for goods to be manufactured as sales UNLESS the party ordering the goods undertakes to supply a substantial part of the materials necessary for manufacture or production.`,
+        cisgRef: `CISG Art. 3(1)`,
+        noteRef: `Secretariat Note Para. 9`,
+        termLink: `substantive`
+      },
+      {
+        id: `q3`,
+        category: `Part I`,
+        difficulty: `Advanced`,
+        question: `During litigation over defective machinery, a consumer injured by the machine sues the seller for personal injury, and the buyer disputes whether title passed prior to bankruptcy. Which of these issues does the CISG govern?`,
+        options: [
+          `Both personal injury liability and transfer of property title.`,
+          `Only transfer of property title, as Article 30 requires transferring property.`,
+          `Neither issue—Article 4(b) excludes effect on property in goods sold, and Article 5 excludes death or personal injury liability.`,
+          `Only personal injury liability if the buyer gave timely notice under Article 39.`
+        ],
+        correctIndex: 2,
+        rationale: `Article 4(b) expressly removes the effect the contract may have on the property in the goods sold from CISG scope, and Article 5 excludes seller liability for death or personal injury caused by the goods to any person.`,
+        cisgRef: `CISG Arts. 4(b), 5`,
+        noteRef: `Secretariat Note Para. 11`,
+        termLink: `property`
+      },
+      {
+        id: `q4`,
+        category: `Part I`,
+        difficulty: `Core`,
+        question: `A party in State A (which made an Article 96 written-form declaration) orally agrees with a party in State B to waive a contractual requirement. Can the parties rely on Article 6 to contract out of Article 12?`,
+        options: [
+          `Yes, because Article 6 grants unlimited party autonomy.`,
+          `No, Article 12 expressly prohibits derogating from or varying its effect when a party is in an Article 96 declaring State.`,
+          `Yes, if both parties confirm orally before two witnesses under Article 11.`,
+          `Only if the contract is worth less than a threshold set by domestic law.`
+        ],
+        correctIndex: 1,
+        rationale: `Article 6 states that party autonomy is “subject to article 12,” and Article 12 concludes explicitly: “The parties may not derogate from or vary the effect of this article.”`,
+        cisgRef: `CISG Arts. 6, 11, 12, 96`,
+        noteRef: `Secretariat Note Paras. 15–16`,
+        termLink: `declaration`
+      },
+
+      // Part II (4)
+      {
+        id: `q5`,
+        category: `Part II`,
+        difficulty: `Core`,
+        question: `A supplier sends a glossy catalog listing prices for 20 industrial pumps to 500 companies worldwide. Does this catalog constitute a binding offer under CISG Article 14?`,
+        options: [
+          `Yes, because it specifies both the goods and the price.`,
+          `No, under Article 14(2) a proposal not addressed to one or more specific persons is merely an invitation to make offers unless clearly indicated otherwise.`,
+          `Yes, provided the recipient responds within a reasonable time under Article 18.`,
+          `No, because catalogs are never considered writing under Article 13.`
+        ],
+        correctIndex: 1,
+        rationale: `Article 14(2) establishes that a proposal other than one addressed to one or more specific persons is considered merely an invitation to make offers, unless the contrary is clearly indicated by the sender.`,
+        cisgRef: `CISG Art. 14(1)–(2)`,
+        noteRef: `Secretariat Note Para. 18`,
+        termLink: `offer`
+      },
+      {
+        id: `q6`,
+        category: `Part II`,
+        difficulty: `Advanced`,
+        question: `On Monday, Seller sends an offer stating “open for 10 days.” On Wednesday, Buyer begins costly tooling in reliance on the offer, and on Thursday Seller sends a revocation before Buyer dispatches acceptance. Is the revocation effective?`,
+        options: [
+          `Yes, because under Article 16(1) an offer may always be revoked before acceptance is dispatched.`,
+          `No, under Article 16(2) the offer is irrevocable both because it fixed a time for acceptance (16(2)(a)) and because Buyer reasonably acted in reliance (16(2)(b)).`,
+          `Yes, unless Buyer paid consideration to keep the offer open.`,
+          `No, only if Buyer had already notified Seller of the tooling work.`
+        ],
+        correctIndex: 1,
+        rationale: `Article 16(2) bars revocation if (a) the offer indicates irrevocability, such as by stating a fixed time for acceptance, OR (b) it was reasonable for the offeree to rely on the offer as irrevocable and the offeree acted in reliance.`,
+        cisgRef: `CISG Art. 16(1)–(2)`,
+        noteRef: `Secretariat Note Para. 19`,
+        termLink: `offeree`
+      },
+      {
+        id: `q7`,
+        category: `Part II`,
+        difficulty: `Core`,
+        question: `Buyer replies to Seller’s offer: “We accept your offer in full, provided all disputes are resolved by arbitration in Vienna.” Seller stays silent. Has a contract been formed?`,
+        options: [
+          `Yes, on Buyer’s terms, because Seller did not object without undue delay under Article 19(2).`,
+          `No—under Article 19(3), terms relating to the settlement of disputes alter the offer materially, making Buyer’s reply a rejection and counter-offer.`,
+          `Yes, on Seller’s original terms, dropping the arbitration clause.`,
+          `No, because silence never counts as acceptance under Article 18(1), even for non-material terms.`
+        ],
+        correctIndex: 1,
+        rationale: `Article 19(3) explicitly classifies additional or different terms relating to price, payment, quality, quantity, place/time of delivery, liability, or settlement of disputes as material alterations. Under Art. 19(1), the reply is a counter-offer requiring Seller’s acceptance.`,
+        cisgRef: `CISG Art. 19(1)–(3)`,
+        noteRef: `Secretariat Note Paras. 21–22`,
+        termLink: `purport`
+      },
+      {
+        id: `q8`,
+        category: `Part II`,
+        difficulty: `Core`,
+        question: `Buyer posts a timely acceptance letter, but postal delays cause it to arrive three days after the fixed deadline. The postmark clearly shows normal transmission would have arrived on time. What is the result under Article 21(2)?`,
+        options: [
+          `The late acceptance is void unless Buyer sends a second confirmation.`,
+          `The late acceptance is effective unless Seller, without delay, orally informs Buyer or dispatches notice that the offer has lapsed.`,
+          `The contract concluded when Buyer posted the letter under the mailbox rule.`,
+          `The acceptance is effective only if Buyer also pays a late fee.`
+        ],
+        correctIndex: 1,
+        rationale: `Under Article 21(2), when a writing shows it was sent in circumstances where normal transmission would have reached the offeror in time, it is effective as an acceptance unless the offeror promptly notifies the offeree that the offer has lapsed.`,
+        cisgRef: `CISG Arts. 21(2), 23`,
+        noteRef: `Secretariat Note Para. 17`,
+        termLink: `notice`
+      },
+
+      // Part III (6)
+      {
+        id: `q9`,
+        category: `Part III`,
+        difficulty: `Core`,
+        question: `Seller delivers machinery with a minor paint scratch easily fixed for $150 on a $200,000 machine. Buyer immediately declares the contract avoided and demands substitute machinery. Is avoidance valid?`,
+        options: [
+          `Yes, under the perfect-tender rule any non-conformity justifies avoidance.`,
+          `No—neither avoidance (Art. 49) nor substitute goods (Art. 46(2)) is available because a minor repairable defect is not a fundamental breach under Article 25.`,
+          `Yes, provided Buyer gave notice within 24 hours.`,
+          `Only if Seller refuses to pay $150 in damages.`
+        ],
+        correctIndex: 1,
+        rationale: `Under Article 25, a fundamental breach must substantially deprive the buyer of what it was entitled to expect. Both delivery of substitute goods (Art. 46(2)) and avoidance for non-conformity (Art. 49(1)(a)) require a fundamental breach; Buyer should instead pursue repair (Art. 46(3)), price reduction (Art. 50), or damages (Art. 74).`,
+        cisgRef: `CISG Arts. 25, 46(2)–(3), 49, 50`,
+        noteRef: `Secretariat Note Paras. 29–30`,
+        termLink: `breach`
+      },
+      {
+        id: `q10`,
+        category: `Part III`,
+        difficulty: `Advanced`,
+        question: `Twenty-eight months after taking delivery of steel coils (with no contractual guarantee period), Buyer discovers a hidden internal flaw. Seller actually knew of the flaw at delivery and concealed it. Can Buyer still rely on the lack of conformity?`,
+        options: [
+          `No, because Article 39(2) imposes an absolute two-year cut-off from handover.`,
+          `Yes—under Article 40, the seller cannot rely on Articles 38 and 39 when the defect relates to facts the seller knew or could not have been unaware of and did not disclose.`,
+          `Only if Buyer proves a reasonable excuse under Article 44.`,
+          `No, unless the steel coils were sold in transit under Article 68.`
+        ],
+        correctIndex: 1,
+        rationale: `While Article 39(2) bars claims after two years from actual handover, Article 40 overrides both Article 38 and Article 39 if the lack of conformity relates to facts of which the seller knew or could not have been unaware and failed to disclose.`,
+        cisgRef: `CISG Arts. 39(2), 40`,
+        noteRef: `Secretariat Note Para. 25`,
+        termLink: `defect`
+      },
+      {
+        id: `q11`,
+        category: `Part III`,
+        difficulty: `Core`,
+        question: `Buyer contracted for Grade A coffee worth $100,000 at delivery, paid $90,000, and received Grade B coffee worth $60,000 at delivery (when conforming Grade A was worth $100,000). Under Article 50, what is the reduced price?`,
+        options: [
+          `$60,000`,
+          `$54,000 (90,000 × 60,000 / 100,000)`,
+          `$50,000`,
+          `$90,000 minus $10,000 damages`
+        ],
+        correctIndex: 1,
+        rationale: `Article 50 reduces the contract price in the same proportion as the value that the goods actually delivered had at delivery ($60,000) bears to the value conforming goods would have had at that time ($100,000): 60% of the $90,000 contract price = $54,000.`,
+        cisgRef: `CISG Art. 50`,
+        noteRef: `Secretariat Note Para. 28`,
+        termLink: `remedy`
+      },
+      {
+        id: `q12`,
+        category: `Part III`,
+        difficulty: `Core`,
+        question: `A contract involves carriage of 1,000 tons of bulk grain without fixing a specific handover destination. The seller hands the grain (clearly identified to the contract) to the first carrier, and the ship sinks in a storm at sea. Who bears the risk?`,
+        options: [
+          `Seller bears the risk because Seller retained the bill of lading.`,
+          `Buyer bears the risk under Article 67(1)–(2) and must still pay the price under Article 66.`,
+          `Seller bears the risk until the grain clears customs at Buyer’s port.`,
+          `Risk is split 50/50 under Article 79.`
+        ],
+        correctIndex: 1,
+        rationale: `Under Article 67(1), risk passes to the buyer when goods clearly identified to the contract (67(2)) are handed over to the first carrier—even if the seller retains documents controlling disposition. Under Article 66, loss after risk passes does not discharge the buyer from paying the price.`,
+        cisgRef: `CISG Arts. 66, 67(1)–(2)`,
+        noteRef: `Secretariat Note Paras. 31–32`,
+        termLink: `carrier`
+      },
+      {
+        id: `q13`,
+        category: `Part III`,
+        difficulty: `Advanced`,
+        question: `After Seller repudiates a delivery contract, market prices spike, but Buyer refuses an identical replacement lot available locally at +10% and waits three months until prices surge +60%. Can Buyer recover the full +60% loss?`,
+        options: [
+          `Yes, under Article 74 full loss is always recoverable.`,
+          `No—under Article 77, Seller may claim a reduction in damages equal to the loss Buyer could have mitigated by taking reasonable cover measures.`,
+          `Yes, because Buyer had no obligation to act until the original delivery date.`,
+          `No, because Article 78 limits recovery to interest only.`
+        ],
+        correctIndex: 1,
+        rationale: `Article 77 requires a party relying on a breach to take reasonable measures to mitigate the loss; failure entitles the breaching party to claim a reduction in damages by the amount by which the loss should have been mitigated.`,
+        cisgRef: `CISG Arts. 74, 77`,
+        noteRef: `Secretariat Note Para. 30`,
+        termLink: `mitigation`
+      },
+      {
+        id: `q14`,
+        category: `Part III`,
+        difficulty: `Advanced`,
+        question: `An unforeseen government embargo beyond Seller’s control makes delivery impossible for six months (satisfying Article 79). May Buyer still declare the contract avoided for non-delivery?`,
+        options: [
+          `No, an Article 79 exemption blocks all remedies, including avoidance.`,
+          `Yes—Article 79(5) explicitly states that the exemption prevents only damages, not any other right under the Convention.`,
+          `Only if Seller fails to deposit the goods in a warehouse under Article 87.`,
+          `No, unless the embargo was foreseeable at contract conclusion.`
+        ],
+        correctIndex: 1,
+        rationale: `Article 79 exempts the impeded party from liability for damages, but paragraph (5) provides that nothing in Article 79 prevents either party from exercising any right other than to claim damages (such as avoidance or price reduction).`,
+        cisgRef: `CISG Art. 79(1), (5)`,
+        noteRef: `Secretariat Note Para. 30`,
+        termLink: `force-majeure`
+      },
+
+      // Part IV (3)
+      {
+        id: `q15`,
+        category: `Part IV`,
+        difficulty: `Core`,
+        question: `Nordic countries historically declared they would not be bound by Part II (Formation) of the CISG. Which article authorizes a State to exclude Part II or Part III?`,
+        options: [
+          `Article 90`,
+          `Article 92`,
+          `Article 95`,
+          `Article 98`
+        ],
+        correctIndex: 1,
+        rationale: `Article 92(1) authorizes a Contracting State to declare at signature, ratification, acceptance, approval, or accession that it will not be bound by Part II or Part III of the Convention.`,
+        cisgRef: `CISG Art. 92(1)–(2)`,
+        noteRef: `Secretariat Note Para. 37`,
+        termLink: `declaration`
+      },
+      {
+        id: `q16`,
+        category: `Part IV`,
+        difficulty: `Core`,
+        question: `Can a ratifying State enter a custom reservation modifying Article 39’s two-year notice period to six months?`,
+        options: [
+          `Yes, under sovereign treaty discretion.`,
+          `No—Article 98 strictly prohibits any reservations except those expressly authorized in the Convention.`,
+          `Yes, if the UN Secretary-General approves it under Article 89.`,
+          `Only under an Article 94 declaration.`
+        ],
+        correctIndex: 1,
+        rationale: `Article 98 states unequivocally: “No reservations are permitted except those expressly authorized in this Convention” (namely Articles 92–96).`,
+        cisgRef: `CISG Arts. 92–98`,
+        noteRef: `Secretariat Note Para. 37`,
+        termLink: `treaty`
+      },
+      {
+        id: `q17`,
+        category: `Part IV`,
+        difficulty: `Advanced`,
+        question: `When does a State’s formal withdrawal of an Article 92 or Article 95 declaration take effect under Article 97(4)?`,
+        options: [
+          `Immediately upon receipt by the Secretary-General.`,
+          `On the first day of the month following the expiration of six months after receipt of the written notification by the depositary.`,
+          `Twelve months after receipt, matching Article 99 entry into force.`,
+          `Only for contracts concluded two years later.`
+        ],
+        correctIndex: 1,
+        rationale: `Under Article 97(4), withdrawal of a declaration takes effect on the first day of the month following the expiration of six months after the date of receipt of the notification by the depositary.`,
+        cisgRef: `CISG Art. 97(4)`,
+        noteRef: `Secretariat Note Para. 36–37`,
+        termLink: `declaration`
+      },
+
+      // Bilingual Legal English (3)
+      {
+        id: `q18`,
+        category: `Legal English`,
+        difficulty: `Core`,
+        question: `Which Persian legal phrase accurately translates “Good faith” as applied in CISG Article 7(1) (“observance of good faith in international trade”)?`,
+        options: [
+          `سوء نیت (Bad faith)`,
+          `حسن نیت (Honesty or sincerity of intention)`,
+          `قوه قهریه (Force majeure)`,
+          `دارا شدن بلاجهت (Unjust enrichment)`
+        ],
+        correctIndex: 1,
+        rationale: `“Good faith” corresponds to حسن نیت (honesty or sincerity of intention), whereas سوء نیت means bad faith. CISG Article 7(1) elevates the observance of good faith in international trade to a mandatory interpretive standard.`,
+        cisgRef: `CISG Art. 7(1)`,
+        noteRef: `Secretariat Note Para. 13`,
+        termLink: `good-faith`
+      },
+      {
+        id: `q19`,
+        category: `Legal English`,
+        difficulty: `Core`,
+        question: `In CISG Article 19(1), “A reply to an offer which purports to be an acceptance…” — what does “purport” (وانمود کردن / ظاهرا حاکی بودن) mean in legal English?`,
+        options: [
+          `To definitively waive all contractual rights.`,
+          `To appear or profess on its face to be an acceptance, even though its modified terms legally make it a counter-offer.`,
+          `To formally ratify an international treaty.`,
+          `To deposit goods in a third-party warehouse.`
+        ],
+        correctIndex: 1,
+        rationale: `“Purport” (وانمود کردن، ظاهرا دلالت کردن، مفاد) means to appear or profess to be something. In Article 19(1), a reply outwardly framed as an acceptance that adds material modifications is legally a counter-offer.`,
+        cisgRef: `CISG Art. 19(1)`,
+        noteRef: `Secretariat Note Para. 21`,
+        termLink: `purport`
+      },
+      {
+        id: `q20`,
+        category: `Legal English`,
+        difficulty: `Advanced`,
+        question: `Match the CISG Article 81–84 consequence of avoidance—returning goods or price paid—with its precise Legal English and Persian equivalent:`,
+        options: [
+          `Arbitration (داوری، حکمیت)`,
+          `Restitution (اعاده مال، استرداد)`,
+          `Usury (رباخواری)`,
+          `Sublease (اجاره دادن به مستاجر دیگر)`
+        ],
+        correctIndex: 1,
+        rationale: `Restitution (اعاده مال به صاحب اصلی / استرداد) denotes the restoration of goods supplied or price paid when a contract is avoided under CISG Articles 81–84.`,
+        cisgRef: `CISG Arts. 81–84`,
+        noteRef: `CISG Part III, Ch. V, Sec. V`,
+        termLink: `restitution`
+      }
+    ];
+
+    // =========================================================================
+    // APPLICATION STATE (Persisted via window.notebookAppApi)
+    // =========================================================================
+    let appState = {
+      partFilter: `all`,
+      cisgSearch: ``,
+      cisgStatusFilter: `all`,
+      showSecretariatNotes: true,
+      selectedUnitId: `unit-art1`,
+      masteredUnits: [],
+      quizCategory: `all`,
+      quizMode: `practice`, // 'practice' | 'exam' | 'review'
+      quizIndex: 0,
+      quizAnswers: {}, // { [qId]: { selectedIndex, checked } }
+      examGraded: false,
+      glossarySearch: ``,
+      glossaryCategory: `all`,
+      savedTermsOnly: false,
+      bookmarkedTerms: []
+    };
+
+    let activePopoverTermId = null;
+
+    // Safe wrapper for notebookAppApi
+    function hasApi() {
+      return typeof window.notebookAppApi !== `undefined` && window.notebookAppApi !== null;
+    }
+
+    async function persistState() {
+      if (!hasApi() || typeof window.notebookAppApi.setAppState !== `function`) return;
+      try {
+        await window.notebookAppApi.setAppState({
+          partFilter: appState.partFilter,
+          showSecretariatNotes: appState.showSecretariatNotes,
+          selectedUnitId: appState.selectedUnitId,
+          masteredUnits: appState.masteredUnits,
+          quizCategory: appState.quizCategory,
+          quizMode: appState.quizMode,
+          quizIndex: appState.quizIndex,
+          quizAnswers: appState.quizAnswers,
+          examGraded: appState.examGraded,
+          bookmarkedTerms: appState.bookmarkedTerms
+        });
+      } catch (err) {
+        // Ignore transient host persistence errors
+      }
+    }
+
+    // =========================================================================
+    // INITIALIZATION
+    // =========================================================================
+    document.addEventListener(`DOMContentLoaded`, async function () {
+      if (hasApi() && typeof window.notebookAppApi.getAppState === `function`) {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === `object`) {
+            if (Array.isArray(saved.masteredUnits)) appState.masteredUnits = saved.masteredUnits;
+            if (Array.isArray(saved.bookmarkedTerms)) appState.bookmarkedTerms = saved.bookmarkedTerms;
+            if (saved.quizAnswers && typeof saved.quizAnswers === `object`) appState.quizAnswers = saved.quizAnswers;
+            if (typeof saved.partFilter === `string`) appState.partFilter = saved.partFilter;
+            if (typeof saved.showSecretariatNotes === `boolean`) appState.showSecretariatNotes = saved.showSecretariatNotes;
+            if (typeof saved.selectedUnitId === `string`) appState.selectedUnitId = saved.selectedUnitId;
+            if (typeof saved.quizCategory === `string`) appState.quizCategory = saved.quizCategory;
+            if (typeof saved.quizMode === `string`) appState.quizMode = saved.quizMode;
+            if (typeof saved.quizIndex === `number`) appState.quizIndex = saved.quizIndex;
+            if (typeof saved.examGraded === `boolean`) appState.examGraded = saved.examGraded;
+          }
+        } catch (err) {
+          // Proceed with default state
+        }
+      }
+
+      syncControlsFromState();
+      renderAll();
+
+      if (typeof lucide !== `undefined` && typeof lucide.createIcons === `function`) {
+        lucide.createIcons();
+      }
+      if (hasApi() && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    });
+
+    function syncControlsFromState() {
+      document.querySelectorAll(`[data-part]`).forEach(function (btn) {
+        btn.classList.toggle(`active`, btn.dataset.part === appState.partFilter);
+      });
+      document.querySelectorAll(`[data-qcat]`).forEach(function (btn) {
+        btn.classList.toggle(`active`, btn.dataset.qcat === appState.quizCategory);
+      });
+
+      const notesBtn = document.getElementById(`toggle-notes-btn`);
+      if (notesBtn) {
+        notesBtn.setAttribute(`aria-pressed`, appState.showSecretariatNotes ? `true` : `false`);
+        notesBtn.innerHTML = `<i data-lucide="book-open" width="16" height="16" aria-hidden="true"></i> Secretariat Notes: ${appState.showSecretariatNotes ? `On` : `Off`}`;
+      }
+
+      updateQuizModeButtons();
+    }
+
+    function renderAll() {
+      renderKPIs();
+      renderCisgModules();
+      renderInspector();
+      renderQuiz();
+      renderScoreLedger();
+      renderGlossary();
+      if (typeof lucide !== `undefined` && typeof lucide.createIcons === `function`) {
+        lucide.createIcons();
+      }
+    }
+
+    // =========================================================================
+    // NAVIGATION & KPI HELPERS
+    // =========================================================================
+    function scrollToSection(id, btnEl) {
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: `smooth`, block: `start` });
+      }
+      if (btnEl) {
+        document.querySelectorAll(`.nav-link`).forEach(function (el) {
+          el.classList.remove(`active`);
+        });
+        btnEl.classList.add(`active`);
+      }
+    }
+
+    function renderKPIs() {
+      const masteredCount = appState.masteredUnits.length;
+      const totalUnits = CISG_MODULES.length;
+      const pct = Math.round((masteredCount / totalUnits) * 100);
+
+      const kpiMastered = document.getElementById(`kpi-mastered`);
+      const kpiMasteredPct = document.getElementById(`kpi-mastered-pct`);
+      if (kpiMastered) kpiMastered.textContent = `${masteredCount} / ${totalUnits}`;
+      if (kpiMasteredPct) kpiMasteredPct.textContent = `${pct}% complete`;
+
+      const checkedEntries = Object.entries(appState.quizAnswers).filter(function (entry) {
+        return entry[1] && entry[1].checked;
+      });
+      let correctCount = 0;
+      checkedEntries.forEach(function (entry) {
+        const q = QUIZ_DATA.find(function (item) { return item.id === entry[0]; });
+        if (q && q.correctIndex === entry[1].selectedIndex) correctCount++;
+      });
+
+      const kpiAccuracy = document.getElementById(`kpi-accuracy`);
+      const kpiQuizCount = document.getElementById(`kpi-quiz-count`);
+      if (kpiAccuracy) {
+        kpiAccuracy.textContent = checkedEntries.length > 0
+          ? `${Math.round((correctCount / checkedEntries.length) * 100)}%`
+          : `—`;
+      }
+      if (kpiQuizCount) {
+        kpiQuizCount.textContent = `${checkedEntries.length} / ${QUIZ_DATA.length} graded`;
+      }
+
+      const kpiBookmarks = document.getElementById(`kpi-bookmarks`);
+      if (kpiBookmarks) {
+        kpiBookmarks.textContent = `${appState.bookmarkedTerms.length} / ${GLOSSARY_DATA.length}`;
+      }
+    }
+
+    // =========================================================================
+    // INLINE BILINGUAL TERM PARSER & POPOVER
+    // =========================================================================
+    function formatRichTerms(text) {
+      return text.replace(/\{\{([a-z0-9-]+)\}\}/g, function (match, termId) {
+        const termObj = GLOSSARY_DATA.find(function (t) { return t.id === termId; });
+        if (!termObj) return termId;
+        const displayLabel = termObj.term.split(` / `)[0];
+        return `<button type="button" class="term-trigger" data-term="${termObj.id}" onclick="openTermPopover('${termObj.id}', this)" title="Click for Persian &amp; Legal English definition">${displayLabel}</button>`;
+      });
+    }
+
+    function openTermPopover(termId, triggerEl) {
+      const termObj = GLOSSARY_DATA.find(function (t) { return t.id === termId; });
+      const popover = document.getElementById(`term-popover`);
+      if (!termObj || !popover) return;
+
+      activePopoverTermId = termId;
+
+      const titleEl = document.getElementById(`popover-term-title`);
+      const catEl = document.getElementById(`popover-category`);
+      const faEl = document.getElementById(`popover-persian`);
+      const defEl = document.getElementById(`popover-definition`);
+      const synEl = document.getElementById(`popover-synonyms`);
+      const cisgEl = document.getElementById(`popover-cisg`);
+      const saveBtn = document.getElementById(`popover-save-btn`);
+
+      if (titleEl) titleEl.textContent = termObj.term;
+      if (catEl) catEl.textContent = termObj.category;
+      if (faEl) faEl.textContent = termObj.persian;
+      if (defEl) defEl.textContent = termObj.definition;
+      if (synEl) synEl.textContent = `Synonyms: ${termObj.synonyms}`;
+      if (cisgEl) cisgEl.textContent = termObj.cisgRef;
+
+      const isSaved = appState.bookmarkedTerms.includes(termId);
+      if (saveBtn) {
+        saveBtn.textContent = isSaved ? `Saved ✓` : `Save Term`;
+        saveBtn.setAttribute(`aria-pressed`, isSaved ? `true` : `false`);
+      }
+
+      popover.classList.add(`open`);
+
+      if (triggerEl && typeof triggerEl.getBoundingClientRect === `function`) {
+        const rect = triggerEl.getBoundingClientRect();
+        const popRect = popover.getBoundingClientRect();
+        let top = rect.bottom + 8;
+        if (top + popRect.height > window.innerHeight - 16) {
+          top = Math.max(16, rect.top - popRect.height - 8);
+        }
+        let left = Math.min(rect.left, window.innerWidth - popRect.width - 16);
+        left = Math.max(16, left);
+        popover.style.top = `${top}px`;
+        popover.style.left = `${left}px`;
+      } else {
+        popover.style.top = `80px`;
+        popover.style.left = `24px`;
+      }
+    }
+
+    function closeTermPopover() {
+      const popover = document.getElementById(`term-popover`);
+      if (popover) popover.classList.remove(`open`);
+      activePopoverTermId = null;
+    }
+
+    function togglePopoverBookmark() {
+      if (!activePopoverTermId) return;
+      toggleBookmarkTerm(activePopoverTermId);
+      const saveBtn = document.getElementById(`popover-save-btn`);
+      const isSaved = appState.bookmarkedTerms.includes(activePopoverTermId);
+      if (saveBtn) {
+        saveBtn.textContent = isSaved ? `Saved ✓` : `Save Term`;
+        saveBtn.setAttribute(`aria-pressed`, isSaved ? `true` : `false`);
+      }
+    }
+
+    document.addEventListener(`keydown`, function (e) {
+      if (e.key === `Escape`) closeTermPopover();
+    });
+
+    document.addEventListener(`click`, function (e) {
+      const popover = document.getElementById(`term-popover`);
+      if (!popover || !popover.classList.contains(`open`)) return;
+      if (popover.contains(e.target)) return;
+      if (e.target.closest && e.target.closest(`.term-trigger`)) return;
+      closeTermPopover();
+    });
+
+    // =========================================================================
+    // CISG EXPLORER & INSPECTOR
+    // =========================================================================
+    function setPartFilter(part, btnEl) {
+      appState.partFilter = part;
+      document.querySelectorAll(`[data-part]`).forEach(function (btn) {
+        btn.classList.remove(`active`);
+      });
+      if (btnEl) btnEl.classList.add(`active`);
+      persistState();
+      renderCisgModules();
+    }
+
+    function handleCisgSearch(val) {
+      appState.cisgSearch = (val || ``).trim().toLowerCase();
+      renderCisgModules();
+    }
+
+    function handleCisgStatusFilter(val) {
+      appState.cisgStatusFilter = val;
+      renderCisgModules();
+    }
+
+    function toggleSecretariatNotes() {
+      appState.showSecretariatNotes = !appState.showSecretariatNotes;
+      syncControlsFromState();
+      persistState();
+      renderCisgModules();
+      if (typeof lucide !== `undefined` && typeof lucide.createIcons === `function`) {
+        lucide.createIcons();
+      }
+    }
+
+    function selectUnit(unitId) {
+      appState.selectedUnitId = unitId;
+      persistState();
+      renderCisgModules();
+      renderInspector();
+    }
+
+    function toggleMasteredUnit(unitId) {
+      const idx = appState.masteredUnits.indexOf(unitId);
+      if (idx === -1) {
+        appState.masteredUnits.push(unitId);
+      } else {
+        appState.masteredUnits.splice(idx, 1);
+      }
+      persistState();
+      renderKPIs();
+      renderCisgModules();
+    }
+
+    function renderCisgModules() {
+      const container = document.getElementById(`cisg-module-list`);
+      if (!container) return;
+
+      const filtered = CISG_MODULES.filter(function (unit) {
+        if (appState.partFilter !== `all` && unit.part !== appState.partFilter) return false;
+        const isMastered = appState.masteredUnits.includes(unit.id);
+        if (appState.cisgStatusFilter === `mastered` && !isMastered) return false;
+        if (appState.cisgStatusFilter === `unmastered` && isMastered) return false;
+
+        if (appState.cisgSearch) {
+          const hay = `${unit.articles} ${unit.title} ${unit.summary} ${unit.rules.join(` `)} ${unit.secretariatNote}`.toLowerCase();
+          if (!hay.includes(appState.cisgSearch)) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3 style="margin-top:0; font-family: var(--font-headline);">No matching CISG units found</h3>
+            <p style="color: var(--on-surface-variant);">Try clearing your search filter or switching to All Parts.</p>
+            <button type="button" class="btn btn-secondary" onclick="clearCisgFilters()">Reset Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(function (unit) {
+        const isMastered = appState.masteredUnits.includes(unit.id);
+        const isSelected = appState.selectedUnitId === unit.id;
+        const rulesHtml = unit.rules.map(function (r) {
+          return `<li>${formatRichTerms(r)}</li>`;
+        }).join(``);
+
+        const noteHtml = appState.showSecretariatNotes
+          ? `<div class="secretariat-box"><span class="secretariat-label">UNCITRAL Secretariat Explanatory Note</span>${unit.secretariatNote}</div>`
+          : ``;
+
+        return `
+          <article class="module-card ${isMastered ? `mastered` : ``} ${isSelected ? `selected` : ``}">
+            <div class="module-header">
+              <div class="module-meta">
+                <span class="article-badge">${unit.articles}</span>
+                <span class="tag">${unit.partLabel}</span>
+              </div>
+              ${isMastered ? `<span class="tag tag-green">Mastered ✓</span>` : ``}
+            </div>
+            <h3 class="module-title">${unit.title}</h3>
+            <p class="module-summary">${formatRichTerms(unit.summary)}</p>
+            <ul class="module-rules">${rulesHtml}</ul>
+            ${noteHtml}
+            <div class="module-actions">
+              <div class="module-btn-row">
+                <button type="button" class="btn btn-subtle" style="min-height: 40px;" onclick="selectUnit('${unit.id}')">
+                  ${isSelected ? `Inspecting` : `Inspect Unit`}
+                </button>
+                <button type="button" class="btn ${isMastered ? `btn-secondary` : `btn-primary`}" style="min-height: 40px;" onclick="toggleMasteredUnit('${unit.id}')">
+                  ${isMastered ? `Unmark Mastered` : `Mark Mastered`}
+                </button>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--on-surface-variant);">${unit.terms.length} linked bilingual terms</span>
+            </div>
+          </article>
+        `;
+      }).join(``);
+    }
+
+    function clearCisgFilters() {
+      appState.partFilter = `all`;
+      appState.cisgSearch = ``;
+      appState.cisgStatusFilter = `all`;
+      const searchEl = document.getElementById(`cisg-search`);
+      const statusEl = document.getElementById(`cisg-status-filter`);
+      if (searchEl) searchEl.value = ``;
+      if (statusEl) statusEl.value = `all`;
+      syncControlsFromState();
+      renderCisgModules();
+    }
+
+    function renderInspector() {
+      const unit = CISG_MODULES.find(function (u) { return u.id === appState.selectedUnitId; }) || CISG_MODULES[1];
+      const titleEl = document.getElementById(`inspector-title`);
+      const bodyEl = document.getElementById(`inspector-body`);
+      const termsEl = document.getElementById(`inspector-terms`);
+
+      if (titleEl) titleEl.textContent = `${unit.articles}: ${unit.title}`;
+      if (bodyEl) bodyEl.innerHTML = `<strong>Secretariat Context:</strong> ${unit.secretariatNote}`;
+
+      if (termsEl) {
+        const linked = unit.terms.map(function (tId) {
+          return GLOSSARY_DATA.find(function (g) { return g.id === tId; });
+        }).filter(Boolean);
+
+        termsEl.innerHTML = `
+          <p class="field-label" style="margin: 0 0 var(--space-xs) 0;">Key Bilingual Terms in This Unit</p>
+          <div style="display: grid; gap: var(--space-xs);">
+            ${linked.map(function (t) {
+              return `
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:var(--space-sm); padding:var(--space-xs) var(--space-sm); background:var(--surface-container); border-radius:var(--rounded);">
+                  <button type="button" class="term-trigger" onclick="openTermPopover('${t.id}', this)">${t.term}</button>
+                  <span class="fa" lang="fa" style="font-size:0.875rem; color:var(--secondary);">${t.persian}</span>
+                </div>
+              `;
+            }).join(``)}
+          </div>
+        `;
+      }
+    }
+
+    // =========================================================================
+    // INTERACTIVE QUIZ STUDIO
+    // =========================================================================
+    function getFilteredQuestions() {
+      let pool = QUIZ_DATA.slice();
+      if (appState.quizCategory !== `all`) {
+        pool = pool.filter(function (q) { return q.category === appState.quizCategory; });
+      }
+      if (appState.quizMode === `review`) {
+        pool = pool.filter(function (q) {
+          const ans = appState.quizAnswers[q.id];
+          return ans && ans.checked && ans.selectedIndex !== q.correctIndex;
+        });
+      }
+      return pool;
+    }
+
+    function setQuizCategory(cat, btnEl) {
+      appState.quizCategory = cat;
+      appState.quizIndex = 0;
+      document.querySelectorAll(`[data-qcat]`).forEach(function (btn) {
+        btn.classList.remove(`active`);
+      });
+      if (btnEl) btnEl.classList.add(`active`);
+      persistState();
+      renderQuiz();
+    }
+
+    function setQuizMode(mode) {
+      appState.quizMode = mode;
+      appState.quizIndex = 0;
+      updateQuizModeButtons();
+      persistState();
+      renderQuiz();
+    }
+
+    function updateQuizModeButtons() {
+      const pBtn = document.getElementById(`mode-practice-btn`);
+      const eBtn = document.getElementById(`mode-exam-btn`);
+      const rBtn = document.getElementById(`mode-review-btn`);
+      if (pBtn) pBtn.setAttribute(`aria-pressed`, appState.quizMode === `practice` ? `true` : `false`);
+      if (eBtn) eBtn.setAttribute(`aria-pressed`, appState.quizMode === `exam` ? `true` : `false`);
+      if (rBtn) rBtn.setAttribute(`aria-pressed`, appState.quizMode === `review` ? `true` : `false`);
+    }
+
+    function selectQuizOption(qId, optIdx) {
+      const existing = appState.quizAnswers[qId];
+      if (appState.quizMode === `practice` && existing && existing.checked) return;
+
+      appState.quizAnswers[qId] = {
+        selectedIndex: optIdx,
+        checked: appState.quizMode === `practice` ? true : (existing ? existing.checked : false)
+      };
+
+      persistState();
+      renderKPIs();
+      renderQuiz();
+      renderScoreLedger();
+    }
+
+    function submitExam() {
+      const pool = getFilteredQuestions();
+      pool.forEach(function (q) {
+        const ans = appState.quizAnswers[q.id];
+        if (ans && typeof ans.selectedIndex === `number`) {
+          ans.checked = true;
+        }
+      });
+      appState.examGraded = true;
+      persistState();
+      renderKPIs();
+      renderQuiz();
+      renderScoreLedger();
+    }
+
+    function goToQuestion(idx) {
+      appState.quizIndex = idx;
+      persistState();
+      renderQuiz();
+    }
+
+    function resetQuiz(btnEl) {
+      if (btnEl && btnEl.dataset.armed !== `true`) {
+        btnEl.dataset.armed = `true`;
+        btnEl.textContent = `Click again to confirm reset`;
+        setTimeout(function () {
+          if (btnEl && btnEl.dataset.armed === `true`) {
+            btnEl.dataset.armed = `false`;
+            btnEl.textContent = `Reset Quiz`;
+          }
+        }, 4000);
+        return;
+      }
+      if (btnEl) {
+        btnEl.dataset.armed = `false`;
+        btnEl.textContent = `Reset Quiz`;
+      }
+      appState.quizAnswers = {};
+      appState.quizIndex = 0;
+      appState.examGraded = false;
+      if (appState.quizMode === `review`) {
+        appState.quizMode = `practice`;
+        updateQuizModeButtons();
+      }
+      persistState();
+      renderKPIs();
+      renderQuiz();
+      renderScoreLedger();
+    }
+
+    function renderQuiz() {
+      const stage = document.getElementById(`quiz-stage`);
+      const dotGrid = document.getElementById(`quiz-dot-grid`);
+      const examWrap = document.getElementById(`exam-submit-wrap`);
+      if (!stage || !dotGrid) return;
+
+      const pool = getFilteredQuestions();
+
+      if (examWrap) {
+        examWrap.style.display = appState.quizMode === `exam` && pool.length > 0 ? `block` : `none`;
+      }
+
+      if (pool.length === 0) {
+        dotGrid.innerHTML = ``;
+        stage.innerHTML = `
+          <div style="padding: var(--space-md) 0;">
+            <span class="tag tag-green">Review Queue Clear</span>
+            <h3 style="font-family: var(--font-headline); margin: var(--space-sm) 0;">No missed questions to review</h3>
+            <p style="color: var(--on-surface-variant); margin: 0 0 var(--space-md) 0;">
+              ${appState.quizMode === `review`
+                ? `You currently have zero incorrect graded questions in this category. Switch to Practice or Exam Mode to test more CISG articles.`
+                : `No questions match this category filter.`}
+            </p>
+            <button type="button" class="btn btn-primary" onclick="setQuizMode('practice')">Return to Practice Mode</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (appState.quizIndex >= pool.length) appState.quizIndex = 0;
+      const q = pool[appState.quizIndex];
+      const ans = appState.quizAnswers[q.id];
+      const isChecked = Boolean(ans && ans.checked);
+      const selectedIdx = ans ? ans.selectedIndex : -1;
+      const isCorrect = isChecked && selectedIdx === q.correctIndex;
+
+      const letters = [`A`, `B`, `C`, `D`];
+
+      const optionsHtml = q.options.map(function (optText, idx) {
+        let cls = `option-btn`;
+        if (isChecked) {
+          if (idx === q.correctIndex) cls += ` correct`;
+          else if (idx === selectedIdx) cls += ` incorrect`;
+        } else if (idx === selectedIdx) {
+          cls += ` selected`;
+        }
+        const disabledAttr = (appState.quizMode === `practice` && isChecked) ? `disabled` : ``;
+        return `
+          <button type="button" class="${cls}" ${disabledAttr} onclick="selectQuizOption('${q.id}', ${idx})">
+            <span class="option-letter">${letters[idx]}.</span>
+            <span>${optText}</span>
+          </button>
+        `;
+      }).join(``);
+
+      let rationaleHtml = ``;
+      if (isChecked) {
+        const linkedTerm = GLOSSARY_DATA.find(function (t) { return t.id === q.termLink; });
+        const termBtn = linkedTerm
+          ? `<button type="button" class="term-trigger" onclick="openTermPopover('${linkedTerm.id}', this)">${linkedTerm.term} (<span class="fa" lang="fa">${linkedTerm.persian}</span>)</button>`
+          : ``;
+
+        rationaleHtml = `
+          <div class="rationale-panel ${isCorrect ? `` : `wrong`}">
+            <p class="rationale-title">${isCorrect ? `Correct Answer` : `Incorrect — Review Doctrinal Rule`}</p>
+            <p style="margin: 0;">${q.rationale}</p>
+            <div class="rationale-citations">
+              <span class="article-badge">${q.cisgRef}</span>
+              <span class="tag">${q.noteRef}</span>
+              ${termBtn ? `<span>Key Term: ${termBtn}</span>` : ``}
+            </div>
+          </div>
+        `;
+      }
+
+      stage.innerHTML = `
+        <div class="quiz-progress-header">
+          <div style="display:flex; flex-wrap:wrap; gap:var(--space-sm); align-items:center;">
+            <span class="tag tag-navy">${q.category}</span>
+            <span class="tag">${q.difficulty}</span>
+          </div>
+          <span class="quiz-counter">Question ${appState.quizIndex + 1} of ${pool.length}</span>
+        </div>
+
+        <h3 class="quiz-question-text">${q.question}</h3>
+
+        <div class="options-list">${optionsHtml}</div>
+
+        ${rationaleHtml}
+
+        <div class="quiz-nav-row">
+          <button type="button" class="btn btn-secondary" ${appState.quizIndex === 0 ? `disabled` : ``} onclick="goToQuestion(${appState.quizIndex - 1})">
+            Previous Question
+          </button>
+          <button type="button" class="btn btn-primary" ${appState.quizIndex >= pool.length - 1 ? `disabled` : ``} onclick="goToQuestion(${appState.quizIndex + 1})">
+            Next Question
+          </button>
+        </div>
+      `;
+
+      dotGrid.innerHTML = pool.map(function (item, idx) {
+        const a = appState.quizAnswers[item.id];
+        let dotCls = `q-dot`;
+        if (idx === appState.quizIndex) dotCls += ` current`;
+        if (a && a.checked) {
+          dotCls += a.selectedIndex === item.correctIndex ? ` is-correct` : ` is-wrong`;
+        } else if (a && typeof a.selectedIndex === `number`) {
+          dotCls += ` is-pending`;
+        }
+        return `<button type="button" class="${dotCls}" aria-label="Go to question ${idx + 1}" onclick="goToQuestion(${idx})">${idx + 1}</button>`;
+      }).join(``);
+    }
+
+    function renderScoreLedger() {
+      const tbody = document.getElementById(`quiz-score-tbody`);
+      if (!tbody) return;
+      const cats = [`Part I`, `Part II`, `Part III`, `Part IV`, `Legal English`];
+      let grandCorrect = 0;
+      let grandTotal = 0;
+
+      const rowsHtml = cats.map(function (cat) {
+        const catQs = QUIZ_DATA.filter(function (q) { return q.category === cat; });
+        let correct = 0;
+        catQs.forEach(function (q) {
+          const a = appState.quizAnswers[q.id];
+          if (a && a.checked && a.selectedIndex === q.correctIndex) correct++;
+        });
+        grandCorrect += correct;
+        grandTotal += catQs.length;
+        return `
+          <tr>
+            <td>${cat}</td>
+            <td class="num">${correct}</td>
+            <td class="num">${catQs.length}</td>
+          </tr>
+        `;
+      }).join(``);
+
+      tbody.innerHTML = rowsHtml + `
+        <tr class="total-row">
+          <td>Total Graded Correct</td>
+          <td class="num">${grandCorrect}</td>
+          <td class="num">${grandTotal}</td>
+        </tr>
+      `;
+    }
+
+    // =========================================================================
+    // BILINGUAL GLOSSARY
+    // =========================================================================
+    function handleGlossarySearch(val) {
+      appState.glossarySearch = (val || ``).trim().toLowerCase();
+      renderGlossary();
+    }
+
+    function handleGlossaryCategory(val) {
+      appState.glossaryCategory = val;
+      renderGlossary();
+    }
+
+    function toggleSavedTermsFilter() {
+      appState.savedTermsOnly = !appState.savedTermsOnly;
+      const btn = document.getElementById(`saved-terms-btn`);
+      if (btn) btn.setAttribute(`aria-pressed`, appState.savedTermsOnly ? `true` : `false`);
+      renderGlossary();
+    }
+
+    function toggleBookmarkTerm(termId) {
+      const idx = appState.bookmarkedTerms.indexOf(termId);
+      if (idx === -1) appState.bookmarkedTerms.push(termId);
+      else appState.bookmarkedTerms.splice(idx, 1);
+
+      persistState();
+      renderKPIs();
+      renderGlossary();
+    }
+
+    function jumpToCisgUnitByPart(part) {
+      setPartFilter(part, document.querySelector(`[data-part="${part}"]`));
+      scrollToSection(`cisg-explorer`, document.querySelector(`.nav-link`));
+    }
+
+    function renderGlossary() {
+      const tbody = document.getElementById(`glossary-tbody`);
+      const mobileWrap = document.getElementById(`glossary-mobile-cards`);
+      if (!tbody || !mobileWrap) return;
+
+      const filtered = GLOSSARY_DATA.filter(function (item) {
+        if (appState.glossaryCategory !== `all` && item.category !== appState.glossaryCategory) return false;
+        if (appState.savedTermsOnly && !appState.bookmarkedTerms.includes(item.id)) return false;
+        if (appState.glossarySearch) {
+          const hay = `${item.term} ${item.persian} ${item.definition} ${item.synonyms} ${item.cisgRef}`.toLowerCase();
+          if (!hay.includes(appState.glossarySearch)) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5">No terms match your current search or Saved Terms filter.</td></tr>`;
+        mobileWrap.innerHTML = `<div class="empty-state"><p style="margin:0;">No terms match your current filter.</p></div>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(function (item) {
+        const isSaved = appState.bookmarkedTerms.includes(item.id);
+        return `
+          <tr>
+            <td>
+              <div class="glossary-term-name">${item.term}</div>
+              <div class="glossary-synonyms">${item.synonyms}</div>
+            </td>
+            <td class="persian-cell" lang="fa" dir="rtl">${item.persian}</td>
+            <td>
+              <div>${item.definition}</div>
+              <div style="font-size:0.8125rem; color:var(--on-surface-variant); margin-top:var(--space-xs); font-style:italic;">“${item.example}”</div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-subtle" style="min-height: 36px; padding: var(--space-xs) var(--space-sm); font-family: var(--font-mono); font-size: 0.75rem;" onclick="jumpToCisgUnitByPart('${item.part}')">
+                ${item.cisgRef}
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn ${isSaved ? `btn-primary` : `btn-secondary`}" style="min-height: 36px; padding: var(--space-xs) var(--space-sm);" aria-pressed="${isSaved}" onclick="toggleBookmarkTerm('${item.id}')">
+                ${isSaved ? `Saved` : `Save`}
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join(``);
+
+      mobileWrap.innerHTML = filtered.map(function (item) {
+        const isSaved = appState.bookmarkedTerms.includes(item.id);
+        return `
+          <div class="module-card">
+            <div class="module-header">
+              <span class="glossary-term-name">${item.term}</span>
+              <span class="article-badge">${item.cisgRef}</span>
+            </div>
+            <p class="popover-fa" lang="fa" dir="rtl">${item.persian}</p>
+            <p style="margin: 0 0 var(--space-sm) 0; font-size: 0.9rem;">${item.definition}</p>
+            <div class="module-actions">
+              <span style="font-size: 0.75rem; color: var(--on-surface-variant);">${item.category}</span>
+              <button type="button" class="btn ${isSaved ? `btn-primary` : `btn-secondary`}" style="min-height: 40px;" onclick="toggleBookmarkTerm('${item.id}')">
+                ${isSaved ? `Saved ✓` : `Save Term`}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join(``);
+    }
+
+    // =========================================================================
+    // EXPORT STUDY PACK (Via notebookAppApi or Blob fallback)
+    // =========================================================================
+    function exportStudyPack() {
+      const lines = [
+        `cisg.ayoonesi.ir — Personal CISG & Bilingual Legal English Study Pack`,
+        `Mastered Units: ${appState.masteredUnits.length} / ${CISG_MODULES.length}`,
+        ``,
+        `--- SAVED BILINGUAL TERMS (${appState.bookmarkedTerms.length}) ---`
+      ];
+
+      const termsToExport = appState.bookmarkedTerms.length > 0
+        ? GLOSSARY_DATA.filter(function (g) { return appState.bookmarkedTerms.includes(g.id); })
+        : GLOSSARY_DATA;
+
+      termsToExport.forEach(function (t) {
+        lines.push(`${t.term} | ${t.persian} | ${t.cisgRef} — ${t.definition}`);
+      });
+
+      const content = lines.join(`\n`);
+
+      if (hasApi() && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: content,
+          contentType: `text/plain`,
+          encoding: `UTF-8`,
+          filename: `cisg-ayoonesi-study-pack.txt`
+        });
+      } else {
+        const blob = new Blob([content], { type: `text/plain;charset=utf-8` });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement(`a`);
+        link.href = url;
+        link.download = `cisg-ayoonesi-study-pack.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+
+      const banner = document.getElementById(`export-status`);
+      if (banner) {
+        banner.textContent = `Exported study pack (${termsToExport.length} bilingual terms and mastery summary) to cisg-ayoonesi-study-pack.txt.`;
+        banner.classList.add(`visible`);
+        setTimeout(function () {
+          banner.classList.remove(`visible`);
+        }, 5000);
+      }
+    }
+  </script>
+</body>
+</html>
